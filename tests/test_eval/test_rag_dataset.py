@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from app.rag.document_loader import load_rag_documents
@@ -14,10 +15,11 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 def test_gold_dataset_has_required_coverage_and_unique_case_ids():
     cases = load_cases(PROJECT_ROOT / "eval" / "rag_cases.jsonl")
 
-    # The production Gold set is intentionally extensible as new cities and
-    # scenarios are added; keep a floor here instead of freezing the dataset
-    # at the original Chengdu-only baseline.
-    assert len(cases) >= 100
+    # This is a scope-regression set, not a semantic leaderboard. Its safety
+    # cases intentionally group all evidence for one query under multi-Gold.
+    assert len(cases) == 108
+    assert sum(not case.expected_no_results for case in cases) == 84
+    assert sum(case.expected_no_results for case in cases) == 24
     assert len({case.case_id for case in cases}) == len(cases)
     assert {
         "guides",
@@ -28,7 +30,19 @@ def test_gold_dataset_has_required_coverage_and_unique_case_ids():
     assert {"北京", "上海", "杭州"}.issubset(
         {str(case.metadata_filter.get("city")) for case in cases}
     )
-    assert sum(case.expected_no_results for case in cases) >= 20
+    safety_cases = [case for case in cases if case.category == "safety_notices"]
+    assert len(safety_cases) == 12
+    assert all(len(case.gold_chunk_ids) == 2 for case in safety_cases)
+    signatures = [
+        (
+            case.semantic_query,
+            case.keyword_query,
+            json.dumps(case.metadata_filter, ensure_ascii=False, sort_keys=True),
+        )
+        for case in cases
+        if not case.expected_no_results
+    ]
+    assert len(signatures) == len(set(signatures))
 
 
 def test_gold_chunk_ids_match_the_current_corpus_without_loading_models():
@@ -47,8 +61,8 @@ def test_gold_chunk_ids_match_the_current_corpus_without_loading_models():
     )
 
 
-def test_agentic_challenge_set_has_need_level_groups_and_semantic_decoys():
-    """Challenge Set 必须真正覆盖多意图，而不是 baseline 的重复。"""
+def test_semantic_holdout_has_need_level_groups_and_semantic_decoys():
+    """Semantic Holdout 必须真正覆盖多意图，而不是 Scope Set 的重复。"""
 
     cases = load_cases(PROJECT_ROOT / "eval" / "rag_challenge_cases.jsonl")
 

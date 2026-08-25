@@ -2,9 +2,14 @@
 
 ## 已完成：RAG Eval v1
 
-评测直接复用生产检索组件：`InMemoryBM25Index`、`ChromaVectorStore`、`matching_chunk_ids`、RRF 与 `CrossEncoderReranker`。Gold Dataset 位于 `eval/rag_cases.jsonl`，运行前会校验 Gold Chunk 是否仍存在于当前生产语料。
+评测直接复用生产检索组件：`InMemoryBM25Index`、`ChromaVectorStore`、`matching_chunk_ids`、RRF 与 `CrossEncoderReranker`。运行前会校验 Gold Chunk 是否仍存在于当前生产语料。
 
-固定变量：Gold Dataset、当前多城市语料（成都、北京、上海、杭州，共 607 个 Chunk）、Chunking、Metadata Filter 和 Top-K。四个 Variant 只改变检索组合；扩充城市或重新切块后应重新生成报告并记录 corpus version：
+评测集不再承担单一职责：
+
+- `eval/rag_cases.jsonl` 是 **Scope Regression Set**。它检查指定领域、城市和 metadata 下的证据是否可检索；安全查询使用多 Gold，避免相同 query/filter 被错误拆成彼此冲突的单 Gold case。
+- `eval/rag_challenge_cases.jsonl` 是 **Semantic Holdout Set**。它用于比较检索策略在真实自然语言、多偏好、隐式表达和语义干扰下的表现，不能用 Scope Set 的标题匹配高分替代其结论。
+
+在同一 suite 内固定 Gold Dataset、当前多城市语料、Chunking、Metadata Filter、Top-K 和 `embedding_text_version`。四个 Variant 只改变检索组合；扩充语料、重新切块或改变 Vector Embedding 输入格式后应重新生成报告并记录版本：
 
 | Variant | BM25 | Dense | RRF | Reranker |
 | --- | --- | --- | --- | --- |
@@ -13,7 +18,7 @@
 | C | 是 | 是 | 是 | 否 |
 | D | 是 | 是 | 是 | 是 |
 
-输出指标包括 Hit@K、Recall@K、Precision@K、MRR@K、nDCG@K、Metadata Accuracy、Negative Case Accuracy、平均延迟和 P95。完整结果见 `eval/rag_report.md`；Bad Case 是回归资产，不应因修复而删除。
+输出指标包括 Hit@K、Recall@K、Precision@K、MRR@K、nDCG@K、Metadata Accuracy、Negative Case Accuracy、平均延迟和 P95。Scope 与 Semantic Holdout 应分别报告；Bad Case 是回归资产，不应因修复而删除。
 
 ## 未完成：Agent Workflow Eval
 

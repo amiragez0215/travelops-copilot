@@ -19,9 +19,12 @@ when the retrieval results were wrong.
 
 ## 2. The Gold Dataset
 
-`eval/rag_cases.jsonl` is a hand-labelled dataset, not generated test input.
-Every case records two query forms, the metadata filter, stable Gold chunk IDs,
-and graded relevance labels.
+The project uses two hand-labelled datasets, not generated test input.
+`eval/rag_cases.jsonl` is the Scope Regression Set: it proves that versioned
+evidence and metadata constraints remain reachable. `eval/rag_challenge_cases.jsonl`
+is the Semantic Holdout Set: it compares strategies with natural-language,
+multi-need, implicit, and semantic-decoy queries. Every case records two query
+forms, the metadata filter, stable Gold chunk IDs, and graded relevance labels.
 
 ```json
 {
@@ -35,7 +38,9 @@ and graded relevance labels.
 
 Use binary relevance when a chunk is either usable or unusable. Use graded
 relevance when one chunk directly answers the question (`2`) and another only
-provides useful context (`1`). Negative cases deliberately request a city,
+provides useful context (`1`). A single query with several usable chunks must
+use a multi-Gold label; do not duplicate the same query/filter into competing
+single-Gold cases. Negative cases deliberately request a city,
 hotel, or filter absent from the corpus. They verify fail-closed filtering.
 
 ## 3. Metrics you must be able to explain

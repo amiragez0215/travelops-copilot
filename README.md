@@ -142,38 +142,57 @@ EvidenceGrade
 
 ## RAG Eval：检索质量、代价与结论
 
-RAG Eval 使用生产检索组件，而不是独立 Demo Retriever。当前评测语料为 <code>v5-agentic-challenge</code>，包含 **222 个 Chunk**；主评测集为 **120 条 baseline Gold Case**（96 条正例、24 条负例），另保留 **42 条 Agentic Challenge Case** 用于多偏好、含蓄表达、语义干扰和 Metadata 负例测试。
+RAG Eval 使用生产检索组件，而不是独立 Demo Retriever。当前评测语料为 <code>v5-agentic-challenge</code>，包含 **222 个 Chunk**。评测拆分为两个职责明确的数据集：
 
-本次完整四组消融在本地 CPU 环境运行，启动时间不计入单查询延迟：
+- **Scope Regression Set：** 108 条（84 条正例、24 条负例），验证每类版本化证据是否可检索、Metadata Filter 是否 fail-closed。安全类每条查询以多 Gold 表达完整风险证据，避免同一查询对应互斥单 Gold 的错误标注。
+- **Semantic Holdout Set：** 42 条（39 条正例、3 条负例），用于真实表达、多偏好、含蓄需求、语义干扰与 need-level 拆分评估；它不以文档章节标题复述作为主要查询形式。
+
+Scope Regression Set 的完整四组 MiniLM 消融在本地 CPU 环境运行，启动时间不计入单查询延迟：
 
 | Variant | Hit@5 | Recall@5 | MRR@5 | nDCG@5 | Metadata | Negative accuracy | P95 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| BM25 only | 1.0000 | 1.0000 | 0.8187 | 0.8627 | 1.0000 | 1.0000 | 32.06 ms |
-| Vector only | 0.9792 | 0.9792 | 0.7005 | 0.7707 | 1.0000 | 1.0000 | 30.61 ms |
-| BM25 + Vector + RRF | 1.0000 | 1.0000 | 0.7549 | 0.8167 | 1.0000 | 1.0000 | 33.24 ms |
-| Hybrid + BGE Rerank | 1.0000 | 1.0000 | 0.8592 | 0.8945 | 1.0000 | 1.0000 | 4226.71 ms |
+| BM25 only | 1.0000 | 0.9940 | 0.9464 | 0.9586 | 1.0000 | 1.0000 | 33.61 ms |
+| Vector only | 1.0000 | 0.9881 | 0.9524 | 0.9555 | 1.0000 | 1.0000 | 32.88 ms |
+| BM25 + Vector + RRF | 1.0000 | 0.9940 | 0.9504 | 0.9618 | 1.0000 | 1.0000 | 49.86 ms |
+| Hybrid + BGE Rerank | 1.0000 | 0.9940 | 0.9563 | 0.9626 | 1.0000 | 1.0000 | 4326.68 ms |
 
-完整实验口径、候选池诊断和失败 Case 见 [RAG Eval Report](eval/rag_report.md) 与 [Bad Case Registry](eval/rag_bad_cases.md)。
+完整实验口径、候选池诊断和失败 Case 见 [MiniLM Scope Regression Report](eval/rag_report.md)、[MiniLM Semantic Holdout Report](eval/rag_challenge_report.md) 与 [Bad Case Registry](eval/rag_bad_cases.md)。可分别运行：
 
-### 为什么单独向量检索相对较弱
-
-单独 Vector Retrieval 并不是无法召回正确证据：它的 Hit@5 为 0.9792。问题主要在于**首个正确 Chunk 的排序位置与细粒度证据定位能力**，因此 MRR 和 nDCG 明显低于 BM25。
-
-本次评测中，Vector only 未能在 Top-5 命中 Gold Chunk 的两个代表性查询是：
-
-~~~text
-北京展览预约应该怎么安排和注意什么
-北京夜间活动应该怎么安排和注意什么
+~~~powershell
+python -m eval.run_rag_eval --suite scope_regression
+python -m eval.run_rag_eval --suite semantic_holdout
 ~~~
 
-对应结果说明了当前数据与模型组合的特点：
+### Embedding 模型对比：MiniLM 与 BGE Base 中文版
 
-1. **语义相近不等于直接回答。** 北京 Guides 中大量 Chunk 同时包含“文化、博物馆、胡同、夜间、活动”等主题词；Embedding 容易召回整体主题相近的 Chunk，却不一定将“展览预约”或“夜间活动注意事项”的直接证据排在最前。
-2. **BM25 对精确词项更有优势。** 城市名、景点名、酒店名、预约、夜间、雨天、低步行等稀有且明确的词，是旅行语料中的高价值约束。BM25 能利用词项重合和稀有度，将直接包含这些词的 Chunk 提前。
-3. **向量表达会压缩细粒度限制。** 一个 Query 同时包含目的地、活动类型、业务动作和回答形式时，通用 Embedding 需把多重要求压入单一向量；宽泛的“北京文化活动”语义可能稀释“展览预约”的精确意图。
-4. **旅行攻略 Chunk 往往多主题。** 一个 Chunk 可以同时谈博物馆、胡同、美食与交通，因此很像“北京旅行攻略”，却不必然是某个特定问题的最佳证据。
+两次实验固定了语料、Chunking、Gold Case、Metadata Filter、Top-K、RRF、Reranker 和 `v2_metadata_enriched` Embedding 文本，只替换 Dense Embedding 模型。MiniLM 为 `paraphrase-multilingual-MiniLM-L12-v2`；BGE 为本地下载的 `BAAI/bge-base-zh-v1.5`。模型目录被 `.gitignore` 排除，仓库只保存可复现的配置、评测集和结果。
 
-这也是本项目保留 BM25、Dense、RRF 和 Rerank 四组消融的原因：不能预设 Hybrid 一定优于单路检索。当前数据中 BM25 的排名质量高于 RRF；RRF 保持多路召回的鲁棒性；Cross-Encoder 能通过同时阅读 Query 和 Passage 修正部分第一阶段排序错误，但代价是 CPU P95 延迟上升到约 4.23 秒。检索策略应由同一 Gold Dataset 下的实验决定，而不是由直觉决定。
+| Suite / Variant | MiniLM Hit@5 | BGE Hit@5 | MiniLM Recall@5 | BGE Recall@5 | MiniLM MRR@5 | BGE MRR@5 | MiniLM nDCG@5 | BGE nDCG@5 | MiniLM P95 | BGE P95 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Scope / Vector only | 1.0000 | 1.0000 | 0.9881 | 0.9940 | 0.9524 | 0.9405 | 0.9555 | 0.9519 | 32.88 ms | 81.70 ms |
+| Scope / BM25 + Vector + RRF | 1.0000 | 1.0000 | 0.9940 | 0.9940 | 0.9504 | 0.9554 | 0.9618 | 0.9626 | 49.86 ms | 81.42 ms |
+| Semantic / Vector only | 0.8205 | **1.0000** | 0.6880 | **0.9017** | 0.5252 | **0.9573** | 0.5196 | **0.8913** | 38.94 ms | 98.18 ms |
+| Semantic / BM25 + Vector + RRF | 1.0000 | 1.0000 | 0.9038 | **0.9103** | 0.7201 | **0.9487** | 0.7217 | **0.9133** | 37.27 ms | 94.21 ms |
+| Semantic / Hybrid + Rerank | 1.0000 | 1.0000 | **0.9338** | 0.9188 | 0.9274 | **0.9316** | **0.9049** | 0.9047 | 5436.44 ms | 5332.77 ms |
+
+在 Scope Set 中，BGE 没有显著提升，且由于模型更大，Vector P95 从约 33 ms 增至约 82 ms；这符合该集合主要检查可达性与结构化标题定位的性质。
+
+在真正考察自然语言泛化的 Semantic Holdout 中，BGE 的改进非常明显：Vector-only 的 Hit@5 从 0.8205 提升到 1.0000，MRR@5 从 0.5252 提升到 0.9573；Hybrid RRF 的 MRR@5 从 0.7201 提升到 0.9487。尤其是原先 MiniLM 最弱的 `split_need` 偏好检索，BGE Vector-only 已达到 Hit@5 1.0000、Recall@5 1.0000，并将 Decoy Hit@5 降至 0.3889。
+
+加入现有 Cross-Encoder 后，两种 Embedding 的最终结果接近：MiniLM 的 Semantic Recall@5 略高（0.9338 vs 0.9188），BGE 的 MRR@5 略高（0.9316 vs 0.9274），nDCG 基本持平。它说明 BGE 主要改善的是第一阶段 Dense / Hybrid 候选质量，而 Reranker 已能补偿一部分 MiniLM 的排序缺陷。
+
+这说明三个事实：
+
+1. **Scope Set 与 Semantic Holdout 回答不同问题。** 前者验证版本化证据和过滤是否可达，后者才检验自然语言语义泛化，不能混为一张排行榜。
+2. **Embedding 模型必须在语义 Holdout 验证。** BGE 对复杂中文偏好与语义干扰的区分能力显著优于当前 MiniLM；每次模型或输入格式变更都必须使用新的 collection / `embedding_text_version` 重新编码并重跑两套评测。
+3. **Hybrid 的价值主要在候选覆盖，Reranker 的价值在最终精排。** RRF 不保证每个 Scope MRR 都超过强 BM25；在 BGE 下，Hybrid 已获得高质量候选，Cross-Encoder 对最终排名的边际增益相对变小，代价仍是 CPU 秒级 P95。
+
+独立报告与原始机器可读结果：
+
+- [BGE Scope Regression Report](eval/rag_bge_base_zh_v15_scope_report.md) / [JSON](eval/results/rag_bge_base_zh_v15_scope_results.json)
+- [BGE Semantic Holdout Report](eval/rag_bge_base_zh_v15_semantic_report.md) / [JSON](eval/results/rag_bge_base_zh_v15_semantic_results.json)
+
+因此本项目保留 BM25、Dense、RRF 和 Rerank 四组消融：检索策略应由固定语料、固定 Gold 和两类评测集共同决定，而不是由某一个漂亮分数决定。
 
 > Grounded Citation Rate 不在纯 RAG Eval 中伪造数值。它必须以同一运行中的 TripProposal.sources 对照同一次 Evidence Pool 计算，否则只是在重复“检索结果来自语料库”这一无意义事实。
 
@@ -182,7 +201,7 @@ RAG Eval 使用生产检索组件，而不是独立 Demo Retriever。当前评�
 完整测试使用项目实际 Python 3.11 环境运行：
 
 ~~~text
-342 passed
+344 passed
 ~~~
 
 Workflow Eval 使用生产 Graph 拓扑、真实 DecisionGate interrupt / resume、真实 Verifier 与 Commit 断言，并对外部依赖使用确定性替身。32 条 Case 覆盖请求提取、能力边界、工具数据、RAG、Verifier、HITL 修改和 Commit 幂等性：

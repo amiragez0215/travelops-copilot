@@ -234,6 +234,9 @@ class Settings(BaseSettings):
         "paraphrase-multilingual-MiniLM-L12-v2"
     )
     rag_embedding_device: str = "cpu"
+    # Chroma records this value per chunk. Bump it when the text passed to the
+    # embedding model changes so existing chunks are safely re-encoded.
+    rag_embedding_text_version: str = "v2_metadata_enriched"
 
     rag_chunk_size: int = Field(
         default=600,

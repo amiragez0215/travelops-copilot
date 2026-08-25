@@ -1,50 +1,50 @@
 # RAG Eval Bad Case Registry
 
-This registry records the failures from the current production-component RAG
-ablation. Preserving a failure is more useful than silently replacing it with a
-later aggregate score.
+This registry records retrieval failures from production-component RAG
+ablations. Preserving a failure is more useful than silently replacing it with
+a later aggregate score.
 
 ## Current evaluation scope
 
-- Corpus: 222 chunks (v5-agentic-challenge).
-- Dataset: 120 baseline cases: 96 positive and 24 negative.
-- Variants: BM25 only, Vector only, BM25 + Vector + RRF, and Hybrid + BGE Rerank.
-- Metadata Accuracy: 1.0000 for all variants.
-- Negative Case Accuracy: 1.0000 for all variants.
-- Current source of truth: [RAG Eval Report](rag_report.md).
+- Corpus: 222 chunks (v5-agentic-challenge), embedding text
+  `v2_metadata_enriched`.
+- Scope Regression Set: 108 cases, 84 positive and 24 negative; no current
+  variant has a Top-5 miss.
+- Semantic Holdout Set: 42 cases, 39 positive and 3 negative. MiniLM is the
+  source of the retained semantic failures; BGE Base has no Top-5 miss in the
+  current run, but its Decoy metrics remain part of the comparison.
+- Metadata Accuracy and Negative Case Accuracy: 1.0000 for all current variants.
+- Current source of truth: [MiniLM Scope Report](rag_report.md),
+  [MiniLM Semantic Report](rag_challenge_report.md),
+  [BGE Scope Report](rag_bge_base_zh_v15_scope_report.md), and
+  [BGE Semantic Report](rag_bge_base_zh_v15_semantic_report.md).
 
 ## Observed retrieval failures
 
-### rag_scope_guides_pek_03 — B_vector_only
+### Semantic Holdout — MiniLM B_vector_only
 
-- Query: 北京展览预约应该怎么安排和注意什么
-- Metadata filter: city=北京, doc_type=guide
-- Failure: the Gold Chunk did not appear in Top-5.
-- Gold: guide_pek_scope_v1::03::001
-- Vector Top-5: guide_pek_scope_v1::01::001, guide_pek_scope_v1::08::001,
-  guide_pek_agentic_decoys_v1::01::001,
-  guide_pek_agentic_preferences_v1::03::001,
-  guide_pek_agentic_decoys_v1::03::001
+The metadata-enriched MiniLM Vector index fixed the prior scope misses, but it
+still misses natural-language preference cases such as:
 
-### rag_scope_guides_pek_07 — B_vector_only
+- `rag_challenge_hgh_split_culture` — Gold
+  `guide_hgh_agentic_preferences_v1::02::001` is absent from Top-5.
+- `rag_challenge_hgh_split_low_walking` — Gold
+  `guide_hgh_agentic_preferences_v1::03::001` is absent from Top-5.
+- `rag_challenge_sha_combined_family_rain_photo` — both Gold chunks are absent
+  from Top-5.
 
-- Query: 北京夜间活动应该怎么安排和注意什么
-- Metadata filter: city=北京, doc_type=guide
-- Failure: the Gold Chunk did not appear in Top-5.
-- Gold: guide_pek_scope_v1::07::001
-- Vector Top-5: guide_pek_agentic_decoys_v1::01::001,
-  guide_pek_agentic_decoys_v1::03::001,
-  guide_pek_agentic_preferences_v1::05::001,
-  guide_pek_scope_v1::01::001,
-  guide_pek_agentic_preferences_v1::03::001
+The full, versioned ranked IDs remain in
+[`rag_challenge_results.json`](results/rag_challenge_results.json). These are
+regression assets for future embedding-text and model comparisons.
 
 ## Interpretation
 
-The two failures are semantic-ranking failures, not Metadata-filter failures:
-the retrieved chunks obey the Beijing Guides filter but are broad travel-topic
-or deliberately similar decoy chunks rather than direct evidence. They explain
-why Vector only has Hit@5=0.9792, MRR@5=0.7005, and nDCG@5=0.7707 in the
-current report, while BM25 preserves exact-term ranking for this corpus.
+The retained MiniLM failures are semantic-ranking failures, not Metadata-filter
+failures: results obey city/doc-type constraints but are broad travel-topic or
+deliberately similar decoy chunks rather than direct evidence. The BGE Base
+comparison removes these Top-5 misses on the same Holdout, demonstrating that
+the issue was primarily first-stage embedding discrimination rather than
+metadata filtering or Gold-label validity.
 
 Do not fix this registry by deleting the cases. A future change should first
 identify whether the cause is query wording, chunking, embedding drift, fusion,

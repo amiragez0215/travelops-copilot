@@ -251,6 +251,7 @@ def run_ablation(
             # corpus version after a fixture migration.
             "corpus_version": settings.rag_corpus_version,
             "embedding_model": settings.rag_embedding_model,
+            "embedding_text_version": settings.rag_embedding_text_version,
             "reranker_model": settings.rag_rerank_model,
             "rrf_k": settings.rag_rrf_k,
             "fetch_multiplier": retriever.fetch_multiplier,
@@ -313,6 +314,7 @@ def render_markdown(report: Mapping[str, Any]) -> str:
         f"- Startup excluded from query timing: {report['startup_ms']} ms.",
         f"- Embedding: `{report['runtime']['embedding_model']}` on "
         f"`{report['runtime']['device']}`.",
+        f"- Embedding text format: `{report['runtime']['embedding_text_version']}`.",
         f"- Reranker: `{report['runtime']['reranker_model']}`.",
         "",
         "## Ablation Results",

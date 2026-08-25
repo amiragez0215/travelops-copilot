@@ -8,6 +8,8 @@ import chromadb
 from langchain_core.documents import Document
 from langchain_core.embeddings import Embeddings
 
+from app.rag.embedding_text import EMBEDDING_TEXT_VERSION, build_embedding_text
+
 
 @dataclass(frozen=True)
 class VectorHit:
@@ -60,6 +62,7 @@ class ChromaVectorStore:
         collection_name: str,
         embeddings: Embeddings,
         embedding_model_id: str,
+        embedding_text_version: str = EMBEDDING_TEXT_VERSION,
     ) -> None:
         """
         创建或加载持久化 Chroma collection。
@@ -86,6 +89,7 @@ class ChromaVectorStore:
         self.collection_name = collection_name
         self.embeddings = embeddings
         self.embedding_model_id = embedding_model_id
+        self.embedding_text_version = embedding_text_version
 
         # 2. PersistentClient 会自动把 Chroma 数据保存到本地，并在下次启动时加载。
         self.client = chromadb.PersistentClient(path=str(self.persist_directory))
@@ -98,6 +102,7 @@ class ChromaVectorStore:
             metadata={
                 "description": "TravelOps-Copilot RAG chunks",
                 "embedding_model_id": embedding_model_id,
+                "embedding_text_version": embedding_text_version,
             },
         )
 
@@ -122,7 +127,7 @@ class ChromaVectorStore:
 
         同步规则：
             - 新 chunk_id：计算 Embedding 后 upsert。
-            - 已存在但 chunk_hash 改变：重新计算该 chunk 的 Embedding 并 upsert。
+            - 已存在但 chunk_hash 或 embedding_text_version 改变：重新编码并 upsert。
             - chunk_hash 未变化：跳过，不重新编码。
             - Chroma 中存在但当前 Markdown 已不存在：delete_missing=True 时删除。
 
@@ -150,10 +155,14 @@ class ChromaVectorStore:
         existing_metadatas = existing_records.get("metadatas") or []
 
         existing_hash_by_id: dict[str, str] = {}
+        existing_embedding_text_version_by_id: dict[str, str] = {}
 
         for record_id, metadata in zip(existing_ids, existing_metadatas):
             metadata = metadata or {}
             existing_hash_by_id[record_id] = str(metadata.get("chunk_hash") or "")
+            existing_embedding_text_version_by_id[record_id] = str(
+                metadata.get("embedding_text_version") or ""
+            )
 
         existing_id_set = set(existing_ids)
         desired_id_set = set(desired)
@@ -165,21 +174,30 @@ class ChromaVectorStore:
         updated_ids = sorted(
             chunk_id
             for chunk_id in common_ids
-            if existing_hash_by_id.get(chunk_id)
-            != str(desired[chunk_id].metadata.get("chunk_hash") or "")
+            if (
+                existing_hash_by_id.get(chunk_id)
+                != str(desired[chunk_id].metadata.get("chunk_hash") or "")
+                or existing_embedding_text_version_by_id.get(chunk_id)
+                != self.embedding_text_version
+            )
         )
 
         unchanged_ids = sorted(common_ids - set(updated_ids))
         stale_ids = sorted(existing_id_set - desired_id_set) if delete_missing else []
 
-        # 4. 只对新增和真正发生变化的 chunks 计算文档 Embedding。
+        # 4. 只对新增、正文变化或 Embedding 文本格式变化的 chunks 编码。
         upsert_ids = added_ids + updated_ids
 
         if upsert_ids:
             upsert_documents = [desired[chunk_id] for chunk_id in upsert_ids]
+            # Keep raw source bodies in Chroma for retrieval display and
+            # Proposal citations; only the vectors use the enriched text.
             page_contents = [document.page_content for document in upsert_documents]
+            embedding_texts = [
+                build_embedding_text(document) for document in upsert_documents
+            ]
 
-            document_vectors = self.embeddings.embed_documents(page_contents)
+            document_vectors = self.embeddings.embed_documents(embedding_texts)
 
             # 5. 使用 Chroma upsert：存在则更新，不存在则新增。
             self.collection.upsert(
@@ -187,7 +205,12 @@ class ChromaVectorStore:
                 embeddings=document_vectors,
                 documents=page_contents,
                 metadatas=[
-                    _sanitize_metadata_for_chroma(document.metadata)
+                    _sanitize_metadata_for_chroma(
+                        {
+                            **document.metadata,
+                            "embedding_text_version": self.embedding_text_version,
+                        }
+                    )
                     for document in upsert_documents
                 ],
             )

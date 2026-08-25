@@ -61,6 +61,7 @@ def initialize_hybrid_retriever(
             collection_name=settings.rag_chroma_collection,
             embeddings=embeddings,
             embedding_model_id=settings.rag_embedding_model,
+            embedding_text_version=settings.rag_embedding_text_version,
             chunk_size=settings.rag_chunk_size,
             chunk_overlap=settings.rag_chunk_overlap,
             rrf_k=settings.rag_rrf_k,

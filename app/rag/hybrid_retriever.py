@@ -14,6 +14,7 @@ from app.rag.chroma_vector_store import (
     ChromaVectorStore,
     VectorHit,
 )
+from app.rag.embedding_text import EMBEDDING_TEXT_VERSION
 from app.rag.document_loader import (
     DEFAULT_RAG_DOCS_DIR,
     DeduplicationResult,
@@ -112,6 +113,7 @@ class HybridRetriever:
         collection_name: str,
         embeddings: Embeddings,
         embedding_model_id: str,
+        embedding_text_version: str = EMBEDDING_TEXT_VERSION,
         chunk_size: int = 600,
         chunk_overlap: int = 100,
         rrf_k: int = 60,
@@ -148,6 +150,7 @@ class HybridRetriever:
             collection_name=collection_name,
             embeddings=embeddings,
             embedding_model_id=embedding_model_id,
+            embedding_text_version=embedding_text_version,
         )
 
         if reset_collection:

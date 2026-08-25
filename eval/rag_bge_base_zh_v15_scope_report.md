@@ -5,8 +5,8 @@
 - Dataset: 108 cases (84 positive, 24 negative).
 - Query modes: baseline=108
 - Corpus: 222 chunks, version v5-agentic-challenge.
-- Startup excluded from query timing: 20471.67 ms.
-- Embedding: `./models/paraphrase-multilingual-MiniLM-L12-v2` on `cpu`.
+- Startup excluded from query timing: 60596.13 ms.
+- Embedding: `models/bge-base-zh-v1.5` on `cpu`.
 - Embedding text format: `v2_metadata_enriched`.
 - Reranker: `./models/bge-reranker-v2-m3`.
 
@@ -14,10 +14,10 @@
 
 | Variant | Hit@5 | Recall@5 | Precision@5 | MRR@5 | nDCG@5 | Metadata | Negative accuracy | Mean ms | P95 ms |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| A_bm25_only | 1.0000 | 0.9940 | 0.2262 | 0.9464 | 0.9586 | 1.0000 | 1.0000 | 23.3160 | 33.6132 |
-| B_vector_only | 1.0000 | 0.9881 | 0.2238 | 0.9524 | 0.9555 | 1.0000 | 1.0000 | 22.7816 | 32.8768 |
-| C_bm25_vector_rrf | 1.0000 | 0.9940 | 0.2262 | 0.9504 | 0.9618 | 1.0000 | 1.0000 | 26.5335 | 49.8622 |
-| D_bm25_vector_rrf_rerank | 1.0000 | 0.9940 | 0.2262 | 0.9563 | 0.9626 | 1.0000 | 1.0000 | 3013.5068 | 4326.6778 |
+| A_bm25_only | 1.0000 | 0.9940 | 0.2262 | 0.9464 | 0.9586 | 1.0000 | 1.0000 | 63.8907 | 96.6421 |
+| B_vector_only | 1.0000 | 0.9940 | 0.2262 | 0.9405 | 0.9519 | 1.0000 | 1.0000 | 57.3724 | 81.6982 |
+| C_bm25_vector_rrf | 1.0000 | 0.9940 | 0.2262 | 0.9554 | 0.9626 | 1.0000 | 1.0000 | 57.1072 | 81.4157 |
+| D_bm25_vector_rrf_rerank | 1.0000 | 0.9940 | 0.2262 | 0.9583 | 0.9636 | 1.0000 | 1.0000 | 3059.8395 | 4363.3925 |
 
 ## Candidate-Pool Diagnostics
 
@@ -26,7 +26,7 @@ These metrics use the pre-rerank RRF Top-10 candidate pool. They separate first-
 | Variant | Candidate Hit@10 | Candidate Recall@10 |
 | --- | ---: | ---: |
 | A_bm25_only | 1.0000 | 0.9940 |
-| B_vector_only | 1.0000 | 0.9881 |
+| B_vector_only | 1.0000 | 0.9940 |
 | C_bm25_vector_rrf | 1.0000 | 0.9940 |
 | D_bm25_vector_rrf_rerank | 1.0000 | 0.9940 |
 

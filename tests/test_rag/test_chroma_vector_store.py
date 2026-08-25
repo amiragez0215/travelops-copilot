@@ -6,6 +6,7 @@ from langchain_core.documents import Document
 from langchain_core.embeddings import Embeddings
 
 from app.rag.chroma_vector_store import ChromaVectorStore
+from app.rag.embedding_text import EMBEDDING_TEXT_VERSION, build_embedding_text
 
 
 class CountingEmbeddings(Embeddings):
@@ -77,6 +78,56 @@ def test_chroma_sync_skips_unchanged_documents(tmp_path):
     assert second.added_count == 0
     assert second.updated_count == 0
     assert embeddings.embed_documents_calls == calls_after_first
+
+
+def test_embedding_text_includes_retrieval_metadata_but_not_display_mutation():
+    document = Document(
+        page_content="提前预约并携带证件。",
+        metadata={
+            "title": "北京城市活动指南",
+            "section": "展览预约",
+            "city": "北京",
+            "doc_type": "guide",
+            "tags": ["展览", "室内活动"],
+        },
+    )
+
+    assert build_embedding_text(document) == (
+        "标题：北京城市活动指南\n"
+        "章节：展览预约\n"
+        "城市：北京\n"
+        "文档类型：guide\n"
+        "主题：展览、室内活动\n"
+        "正文：\n"
+        "提前预约并携带证件。"
+    )
+    assert document.page_content == "提前预约并携带证件。"
+
+
+def test_chroma_reembeds_when_embedding_text_format_changes(tmp_path):
+    document = _doc("c1", "guides/a.md", "成都美食攻略", "hash-c1")
+    first_embeddings = CountingEmbeddings()
+    first_store = ChromaVectorStore(
+        persist_directory=tmp_path / "chroma",
+        collection_name="travelops_test_embedding_format",
+        embeddings=first_embeddings,
+        embedding_model_id="counting-v1",
+        embedding_text_version="v1_content_only",
+    )
+    first_store.sync_documents([document])
+
+    second_embeddings = CountingEmbeddings()
+    second_store = ChromaVectorStore(
+        persist_directory=tmp_path / "chroma",
+        collection_name="travelops_test_embedding_format",
+        embeddings=second_embeddings,
+        embedding_model_id="counting-v1",
+        embedding_text_version=EMBEDDING_TEXT_VERSION,
+    )
+    report = second_store.sync_documents([document])
+
+    assert report.updated_count == 1
+    assert second_embeddings.embed_documents_calls == 1
 
 
 def test_chroma_updates_only_changed_chunk_and_queries_only_query(tmp_path):
