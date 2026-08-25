@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="930" viewBox="0 0 1600 930" role="img" aria-labelledby="title description">
+  <title id="title">TravelOps-Copilot workflow architecture</title>
+  <desc id="description">A compact five-stage architecture diagram showing request control, tool orchestration, grounded RAG, proposal verification, and human-in-the-loop persistence.</desc>
+  <defs>
+    <linearGradient id="header" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#0f2c5c"/>
+      <stop offset="1" stop-color="#254f8f"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#102a4c" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#53657d"/>
+    </marker>
+    <style>
+      .font { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif; }
+      .title { font-size: 32px; font-weight: 700; fill: #ffffff; }
+      .subtitle { font-size: 16px; fill: #d8e5ff; }
+      .stage { font-size: 15px; font-weight: 700; fill: #ffffff; letter-spacing: .5px; }
+      .stage-sub { font-size: 13px; fill: #60718b; }
+      .node-title { font-size: 17px; font-weight: 700; fill: #17355f; }
+      .node-desc { font-size: 13px; fill: #53657d; }
+      .minor { font-size: 12px; fill: #60718b; }
+      .flow-label { font-size: 13px; font-weight: 700; fill: #53657d; }
+      .source-title { font-size: 15px; font-weight: 700; fill: #17355f; }
+      .source-desc { font-size: 12px; fill: #60718b; }
+      .gate { font-size: 13px; font-weight: 700; fill: #3e526f; }
+      .gate-desc { font-size: 12px; fill: #64758b; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="930" fill="#f7f9fc"/>
+  <rect x="0" y="0" width="1600" height="102" fill="url(#header)"/>
+  <text x="48" y="50" class="font title">TravelOps-Copilot · Agentic Travel Planning Workflow</text>
+  <text x="48" y="79" class="font subtitle">从自然语言需求到可验证 Proposal：工具事实、RAG 证据、规则校验与人工审批形成受控闭环</text>
+  <rect x="1323" y="32" width="229" height="38" rx="19" fill="#ffffff" fill-opacity="0.14"/>
+  <text x="1437" y="57" text-anchor="middle" class="font" font-size="14" font-weight="700" fill="#ffffff">Mock Data · No Real Booking</text>
+
+  <!-- Stage panels -->
+  <g filter="url(#shadow)">
+    <rect x="32" y="132" width="284" height="492" rx="20" fill="#ffffff"/>
+    <rect x="332" y="132" width="284" height="492" rx="20" fill="#ffffff"/>
+    <rect x="632" y="132" width="284" height="492" rx="20" fill="#ffffff"/>
+    <rect x="932" y="132" width="284" height="492" rx="20" fill="#ffffff"/>
+    <rect x="1232" y="132" width="336" height="492" rx="20" fill="#ffffff"/>
+  </g>
+
+  <!-- Panel 1 -->
+  <rect x="32" y="132" width="284" height="58" rx="20" fill="#2d6cdf"/>
+  <rect x="32" y="170" width="284" height="20" fill="#2d6cdf"/>
+  <text x="54" y="158" class="font stage">01 · 请求理解与边界控制</text>
+  <text x="54" y="215" class="font stage-sub">先明确需求，再决定能否进入规划</text>
+  <rect x="52" y="239" width="244" height="75" rx="12" fill="#eef4ff"/>
+  <text x="70" y="267" class="font node-title">InputExtract</text>
+  <text x="70" y="291" class="font node-desc">自然语言 → 结构化 TripRequest</text>
+  <path d="M174 314 L174 335" stroke="#b7c7de" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="52" y="345" width="244" height="82" rx="12" fill="#f4f8ff"/>
+  <text x="70" y="373" class="font node-title">MissingInfoCheck · SafetyCheck</text>
+  <text x="70" y="397" class="font node-desc">缺字段、能力范围、真实支付/预订</text>
+  <path d="M174 427 L174 448" stroke="#b7c7de" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="52" y="458" width="244" height="76" rx="12" fill="#f8fbff"/>
+  <text x="70" y="486" class="font node-title">MemoryRead · PlanningContext</text>
+  <text x="70" y="510" class="font node-desc">读取偏好与历史，注入可信参数</text>
+  <rect x="52" y="558" width="244" height="42" rx="10" fill="#fff3e7"/>
+  <text x="70" y="584" class="font gate">不完整 / 越界 → Clarify 或 SafeReject</text>
+
+  <!-- Panel 2 -->
+  <rect x="332" y="132" width="284" height="58" rx="20" fill="#0f9f8f"/>
+  <rect x="332" y="170" width="284" height="20" fill="#0f9f8f"/>
+  <text x="354" y="158" class="font stage">02 · Tool Orchestration</text>
+  <text x="354" y="215" class="font stage-sub">Policy 管必选，LLM 选可选工具</text>
+  <rect x="352" y="239" width="244" height="75" rx="12" fill="#eaf9f6"/>
+  <text x="370" y="267" class="font node-title">ToolPlan</text>
+  <text x="370" y="291" class="font node-desc">Weather / Flight / Hotel + Activity</text>
+  <path d="M474 314 L474 335" stroke="#a8d9d2" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="352" y="345" width="244" height="82" rx="12" fill="#f0fbf8"/>
+  <text x="370" y="373" class="font node-title">ToolExecute · ToolCheck</text>
+  <text x="370" y="397" class="font node-desc">MCP / Local、超时、有界重试、降级</text>
+  <path d="M474 427 L474 448" stroke="#a8d9d2" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="352" y="458" width="244" height="76" rx="12" fill="#f5fcfa"/>
+  <text x="370" y="486" class="font node-title">CandidateRank · BudgetOptimize</text>
+  <text x="370" y="510" class="font node-desc">候选排序与预算组合优化</text>
+  <rect x="352" y="558" width="244" height="42" rx="10" fill="#eaf9f6"/>
+  <text x="370" y="584" class="font gate">有效工具结果 → Proposal 可组合使用</text>
+
+  <!-- Panel 3 -->
+  <rect x="632" y="132" width="284" height="58" rx="20" fill="#d68a19"/>
+  <rect x="632" y="170" width="284" height="20" fill="#d68a19"/>
+  <text x="654" y="158" class="font stage">03 · Grounded Agentic RAG</text>
+  <text x="654" y="215" class="font stage-sub">检索证据，而非让模型直接编造攻略</text>
+  <rect x="652" y="239" width="244" height="75" rx="12" fill="#fff7e9"/>
+  <text x="670" y="267" class="font node-title">RetrievalPlan</text>
+  <text x="670" y="291" class="font node-desc">LLM 生成结构化 Information Needs</text>
+  <path d="M774 314 L774 335" stroke="#ebca95" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="652" y="345" width="244" height="82" rx="12" fill="#fffaf1"/>
+  <text x="670" y="373" class="font node-title">HybridRetrieve · Rerank</text>
+  <text x="670" y="397" class="font node-desc">BM25 + Dense + Filter + RRF + 可选重排</text>
+  <path d="M774 427 L774 448" stroke="#ebca95" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="652" y="458" width="244" height="76" rx="12" fill="#fffdf7"/>
+  <text x="670" y="486" class="font node-title">EvidenceGrade · RAG Repair</text>
+  <text x="670" y="510" class="font node-desc">Judge 审查证据；修复次数严格有界</text>
+  <rect x="652" y="558" width="244" height="42" rx="10" fill="#fff3e7"/>
+  <text x="670" y="584" class="font gate">证据不足 → insufficient_evidence</text>
+
+  <!-- Panel 4 -->
+  <rect x="932" y="132" width="284" height="58" rx="20" fill="#7a5af8"/>
+  <rect x="932" y="170" width="284" height="20" fill="#7a5af8"/>
+  <text x="954" y="158" class="font stage">04 · Proposal 与 Verifier</text>
+  <text x="954" y="215" class="font stage-sub">把多源事实与证据组合成可检查方案</text>
+  <rect x="952" y="239" width="244" height="100" rx="12" fill="#f3f0ff"/>
+  <text x="970" y="267" class="font node-title">Proposal</text>
+  <text x="970" y="291" class="font node-desc">航班 · 酒店 · 预算 · 活动 · 每日行程</text>
+  <text x="970" y="315" class="font node-desc">仅引用本次 Evidence Pool 的来源</text>
+  <path d="M1074 339 L1074 362" stroke="#cbbdfd" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="952" y="372" width="244" height="100" rx="12" fill="#f8f6ff"/>
+  <text x="970" y="400" class="font node-title">Verifier</text>
+  <text x="970" y="424" class="font node-desc">日期、预算、事实、来源、完整性校验</text>
+  <text x="970" y="448" class="font node-desc">失败 → 修订循环；通过 → 人工审批</text>
+  <rect x="952" y="558" width="244" height="42" rx="10" fill="#f3f0ff"/>
+  <text x="970" y="584" class="font gate">规则校验隔离 LLM 生成不确定性</text>
+
+  <!-- Panel 5 -->
+  <rect x="1232" y="132" width="336" height="58" rx="20" fill="#187b9b"/>
+  <rect x="1232" y="170" width="336" height="20" fill="#187b9b"/>
+  <text x="1254" y="158" class="font stage">05 · HITL、恢复与模拟提交</text>
+  <text x="1254" y="215" class="font stage-sub">用户掌握最终业务副作用的决定权</text>
+  <rect x="1252" y="239" width="296" height="76" rx="12" fill="#eaf7fb"/>
+  <text x="1270" y="267" class="font node-title">DecisionGate · interrupt()</text>
+  <text x="1270" y="291" class="font node-desc">waiting_for_decision + proposal_id + action_id</text>
+  <path d="M1400 315 L1400 336" stroke="#a9d4e2" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="1252" y="346" width="140" height="96" rx="12" fill="#f3fbfd"/>
+  <text x="1270" y="374" class="font node-title">request_changes</text>
+  <text x="1270" y="398" class="font node-desc">RevisionAnalyze</text>
+  <text x="1270" y="420" class="font node-desc">ApplyRevision</text>
+  <rect x="1408" y="346" width="140" height="96" rx="12" fill="#ebf8ef"/>
+  <text x="1426" y="374" class="font node-title">approve</text>
+  <text x="1426" y="398" class="font node-desc">CommitDraft</text>
+  <text x="1426" y="420" class="font node-desc">幂等写入</text>
+  <rect x="1252" y="458" width="296" height="76" rx="12" fill="#f9fbfd"/>
+  <text x="1270" y="486" class="font node-title">cancel / completed → FinalResponse</text>
+  <text x="1270" y="510" class="font node-desc">只有 approve 后才允许写入模拟业务草稿</text>
+  <rect x="1252" y="558" width="296" height="42" rx="10" fill="#eaf7fb"/>
+  <text x="1270" y="584" class="font gate">Checkpoint 支持同一 thread_id 恢复</text>
+
+  <!-- Primary flow arrows -->
+  <path d="M316 380 L332 380" stroke="#53657d" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M616 380 L632 380" stroke="#53657d" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M916 380 L932 380" stroke="#53657d" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M1216 380 L1232 380" stroke="#53657d" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="324" y="365" text-anchor="middle" class="font flow-label">可信约束</text>
+  <text x="624" y="365" text-anchor="middle" class="font flow-label">候选 + 预算</text>
+  <text x="924" y="365" text-anchor="middle" class="font flow-label">Evidence Pool</text>
+  <text x="1224" y="365" text-anchor="middle" class="font flow-label">已验证 Proposal</text>
+
+  <!-- Data sources -->
+  <text x="44" y="673" class="font" font-size="18" font-weight="700" fill="#17355f">受控数据、检索组件与运行时基础设施</text>
+  <text x="44" y="697" class="font minor">数据事实、RAG 文档和状态持久化各自独立，避免把 LLM 输出误当作可信业务事实。</text>
+  <g filter="url(#shadow)">
+    <rect x="32" y="726" width="355" height="146" rx="18" fill="#ffffff"/>
+    <rect x="405" y="726" width="355" height="146" rx="18" fill="#ffffff"/>
+    <rect x="778" y="726" width="355" height="146" rx="18" fill="#ffffff"/>
+    <rect x="1151" y="726" width="417" height="146" rx="18" fill="#ffffff"/>
+  </g>
+  <circle cx="65" cy="762" r="15" fill="#0f9f8f"/>
+  <text x="65" y="768" text-anchor="middle" class="font" font-size="16" font-weight="700" fill="#ffffff">T</text>
+  <text x="92" y="767" class="font source-title">MCP / Local Mock Provider</text>
+  <text x="55" y="801" class="font source-desc">天气、航班、酒店和活动候选的结构化事实来源</text>
+  <text x="55" y="827" class="font source-desc">统一经 ToolExecute / ToolCheck 使用</text>
+
+  <circle cx="438" cy="762" r="15" fill="#d68a19"/>
+  <text x="438" y="768" text-anchor="middle" class="font" font-size="16" font-weight="700" fill="#ffffff">R</text>
+  <text x="465" y="767" class="font source-title">Versioned RAG Corpus</text>
+  <text x="428" y="801" class="font source-desc">Markdown Chunk、Metadata、Gold Dataset</text>
+  <text x="428" y="827" class="font source-desc">旅行建议证据，不承担实时库存或价格事实</text>
+
+  <circle cx="811" cy="762" r="15" fill="#7a5af8"/>
+  <text x="811" y="768" text-anchor="middle" class="font" font-size="16" font-weight="700" fill="#ffffff">I</text>
+  <text x="838" y="767" class="font source-title">Hybrid Retrieval Stack</text>
+  <text x="801" y="801" class="font source-desc">BM25 · Chroma Dense · Metadata Filter · RRF</text>
+  <text x="801" y="827" class="font source-desc">可选 BGE Cross-Encoder Rerank</text>
+
+  <circle cx="1184" cy="762" r="15" fill="#187b9b"/>
+  <text x="1184" y="768" text-anchor="middle" class="font" font-size="16" font-weight="700" fill="#ffffff">S</text>
+  <text x="1211" y="767" class="font source-title">SQLite + Unified Trace Harness</text>
+  <text x="1174" y="801" class="font source-desc">LangGraph Checkpoint、模拟草稿、审批记录、Run / Span</text>
+  <text x="1174" y="827" class="font source-desc">审批前无业务副作用；Trace 仅保留脱敏摘要与版本快照</text>
+</svg>

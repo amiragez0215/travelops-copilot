@@ -1,0 +1,21 @@
+{
+  "catalog_version": "v5-agentic-challenge",
+  "scope": {
+    "date_start": "2026-10-01",
+    "date_end": "2026-10-07",
+    "max_trip_days": 7,
+    "cities": [
+      "杭州",
+      "北京",
+      "上海"
+    ]
+  },
+  "flight_count": 168,
+  "hotel_count_per_city": 11,
+  "weather_count": 21,
+  "rag_case_count": 120,
+  "rag_challenge_case_count": 42,
+  "rag_document_count": 39,
+  "rag_chunk_count": 222,
+  "rag_corpus_policy": "city/scenario/risk documents are date-independent; inventory is date-scoped"
+}

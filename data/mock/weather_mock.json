@@ -1,0 +1,357 @@
+{
+  "provider": "mock_weather_provider",
+  "version": 4,
+  "scope": {
+    "date_start": "2026-10-01",
+    "date_end": "2026-10-07",
+    "cities": [
+      "杭州",
+      "北京",
+      "上海"
+    ]
+  },
+  "items": [
+    {
+      "weather_id": "weather_hgh_20261001",
+      "city": "杭州",
+      "date": "2026-10-01",
+      "condition": "晴",
+      "temperature_low": 15,
+      "temperature_high": 25,
+      "humidity": 48,
+      "wind": "微风",
+      "precipitation_probability": 5,
+      "risk_tags": [],
+      "warnings": [],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_hgh_20261002",
+      "city": "杭州",
+      "date": "2026-10-02",
+      "condition": "多云",
+      "temperature_low": 16,
+      "temperature_high": 24,
+      "humidity": 52,
+      "wind": "东风2级",
+      "precipitation_probability": 15,
+      "risk_tags": [],
+      "warnings": [],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_hgh_20261003",
+      "city": "杭州",
+      "date": "2026-10-03",
+      "condition": "小雨",
+      "temperature_low": 17,
+      "temperature_high": 23,
+      "humidity": 56,
+      "wind": "东南风3级",
+      "precipitation_probability": 65,
+      "risk_tags": [
+        "rain"
+      ],
+      "warnings": [
+        "建议携带雨具，室外路线预留遮雨点。"
+      ],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_hgh_20261004",
+      "city": "杭州",
+      "date": "2026-10-04",
+      "condition": "高温晴",
+      "temperature_low": 22,
+      "temperature_high": 34,
+      "humidity": 60,
+      "wind": "南风2级",
+      "precipitation_probability": 10,
+      "risk_tags": [
+        "heat"
+      ],
+      "warnings": [
+        "午间减少暴晒，安排室内休息和补水。"
+      ],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_hgh_20261005",
+      "city": "杭州",
+      "date": "2026-10-05",
+      "condition": "多云",
+      "temperature_low": 18,
+      "temperature_high": 26,
+      "humidity": 64,
+      "wind": "北风6级",
+      "precipitation_probability": 20,
+      "risk_tags": [
+        "wind"
+      ],
+      "warnings": [
+        "高架步道和江边活动注意阵风，收好轻小物品。"
+      ],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_hgh_20261006",
+      "city": "杭州",
+      "date": "2026-10-06",
+      "condition": "强降雨",
+      "temperature_low": 19,
+      "temperature_high": 25,
+      "humidity": 68,
+      "wind": "东北风5级",
+      "precipitation_probability": 90,
+      "risk_tags": [
+        "heavy_rain"
+      ],
+      "warnings": [
+        "优先室内活动，关注积水、雷电和交通延误。"
+      ],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_hgh_20261007",
+      "city": "杭州",
+      "date": "2026-10-07",
+      "condition": "晴间多云",
+      "temperature_low": 16,
+      "temperature_high": 27,
+      "humidity": 72,
+      "wind": "微风",
+      "precipitation_probability": 10,
+      "risk_tags": [],
+      "warnings": [],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_pek_20261001",
+      "city": "北京",
+      "date": "2026-10-01",
+      "condition": "晴",
+      "temperature_low": 15,
+      "temperature_high": 25,
+      "humidity": 48,
+      "wind": "微风",
+      "precipitation_probability": 5,
+      "risk_tags": [],
+      "warnings": [],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_pek_20261002",
+      "city": "北京",
+      "date": "2026-10-02",
+      "condition": "多云",
+      "temperature_low": 16,
+      "temperature_high": 24,
+      "humidity": 52,
+      "wind": "东风2级",
+      "precipitation_probability": 15,
+      "risk_tags": [],
+      "warnings": [],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_pek_20261003",
+      "city": "北京",
+      "date": "2026-10-03",
+      "condition": "小雨",
+      "temperature_low": 17,
+      "temperature_high": 23,
+      "humidity": 56,
+      "wind": "东南风3级",
+      "precipitation_probability": 65,
+      "risk_tags": [
+        "rain"
+      ],
+      "warnings": [
+        "建议携带雨具，室外路线预留遮雨点。"
+      ],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_pek_20261004",
+      "city": "北京",
+      "date": "2026-10-04",
+      "condition": "高温晴",
+      "temperature_low": 22,
+      "temperature_high": 34,
+      "humidity": 60,
+      "wind": "南风2级",
+      "precipitation_probability": 10,
+      "risk_tags": [
+        "heat"
+      ],
+      "warnings": [
+        "午间减少暴晒，安排室内休息和补水。"
+      ],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_pek_20261005",
+      "city": "北京",
+      "date": "2026-10-05",
+      "condition": "多云",
+      "temperature_low": 18,
+      "temperature_high": 26,
+      "humidity": 64,
+      "wind": "北风6级",
+      "precipitation_probability": 20,
+      "risk_tags": [
+        "wind"
+      ],
+      "warnings": [
+        "高架步道和江边活动注意阵风，收好轻小物品。"
+      ],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_pek_20261006",
+      "city": "北京",
+      "date": "2026-10-06",
+      "condition": "强降雨",
+      "temperature_low": 19,
+      "temperature_high": 25,
+      "humidity": 68,
+      "wind": "东北风5级",
+      "precipitation_probability": 90,
+      "risk_tags": [
+        "heavy_rain"
+      ],
+      "warnings": [
+        "优先室内活动，关注积水、雷电和交通延误。"
+      ],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_pek_20261007",
+      "city": "北京",
+      "date": "2026-10-07",
+      "condition": "晴间多云",
+      "temperature_low": 16,
+      "temperature_high": 27,
+      "humidity": 72,
+      "wind": "微风",
+      "precipitation_probability": 10,
+      "risk_tags": [],
+      "warnings": [],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_sha_20261001",
+      "city": "上海",
+      "date": "2026-10-01",
+      "condition": "晴",
+      "temperature_low": 15,
+      "temperature_high": 25,
+      "humidity": 48,
+      "wind": "微风",
+      "precipitation_probability": 5,
+      "risk_tags": [],
+      "warnings": [],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_sha_20261002",
+      "city": "上海",
+      "date": "2026-10-02",
+      "condition": "多云",
+      "temperature_low": 16,
+      "temperature_high": 24,
+      "humidity": 52,
+      "wind": "东风2级",
+      "precipitation_probability": 15,
+      "risk_tags": [],
+      "warnings": [],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_sha_20261003",
+      "city": "上海",
+      "date": "2026-10-03",
+      "condition": "小雨",
+      "temperature_low": 17,
+      "temperature_high": 23,
+      "humidity": 56,
+      "wind": "东南风3级",
+      "precipitation_probability": 65,
+      "risk_tags": [
+        "rain"
+      ],
+      "warnings": [
+        "建议携带雨具，室外路线预留遮雨点。"
+      ],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_sha_20261004",
+      "city": "上海",
+      "date": "2026-10-04",
+      "condition": "高温晴",
+      "temperature_low": 22,
+      "temperature_high": 34,
+      "humidity": 60,
+      "wind": "南风2级",
+      "precipitation_probability": 10,
+      "risk_tags": [
+        "heat"
+      ],
+      "warnings": [
+        "午间减少暴晒，安排室内休息和补水。"
+      ],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_sha_20261005",
+      "city": "上海",
+      "date": "2026-10-05",
+      "condition": "多云",
+      "temperature_low": 18,
+      "temperature_high": 26,
+      "humidity": 64,
+      "wind": "北风6级",
+      "precipitation_probability": 20,
+      "risk_tags": [
+        "wind"
+      ],
+      "warnings": [
+        "高架步道和江边活动注意阵风，收好轻小物品。"
+      ],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_sha_20261006",
+      "city": "上海",
+      "date": "2026-10-06",
+      "condition": "强降雨",
+      "temperature_low": 19,
+      "temperature_high": 25,
+      "humidity": 68,
+      "wind": "东北风5级",
+      "precipitation_probability": 90,
+      "risk_tags": [
+        "heavy_rain"
+      ],
+      "warnings": [
+        "优先室内活动，关注积水、雷电和交通延误。"
+      ],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    },
+    {
+      "weather_id": "weather_sha_20261007",
+      "city": "上海",
+      "date": "2026-10-07",
+      "condition": "晴间多云",
+      "temperature_low": 16,
+      "temperature_high": 27,
+      "humidity": 72,
+      "wind": "微风",
+      "precipitation_probability": 10,
+      "risk_tags": [],
+      "warnings": [],
+      "updated_at": "2026-09-30T06:00:00+08:00"
+    }
+  ]
+}

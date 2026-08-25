@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="TravelOps-Copilot：旅行方案与运行管理界面" />
+    <title>TravelOps Copilot · 智能旅行规划</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="TravelOps Copilot 首页">
+          <span class="brand-mark" aria-hidden="true">✦</span>
+          <span><strong>TravelOps</strong><small>Copilot</small></span>
+        </a>
+
+        <!--
+          两个按钮只切换同一份、已经从后端获得的公开数据，不会重新执行
+          工作流。这样普通用户和管理员看到的是同一次规划的不同信息视图。
+        -->
+        <nav class="page-tabs" aria-label="页面视图" role="tablist">
+          <button id="user-page-button" class="page-tab is-active" type="button" role="tab" aria-controls="user-page" aria-selected="true">用户方案</button>
+          <button id="manager-page-button" class="page-tab" type="button" role="tab" aria-controls="manager-page" aria-selected="false">管理员面板</button>
+        </nav>
+      </header>
+
+      <!-- 面向旅行者：只输入需求、阅读旅行方案和提交人工决定。 -->
+      <section id="user-page" class="page-view" role="tabpanel" aria-labelledby="user-page-button">
+        <section class="hero user-hero">
+          <div>
+            <p class="eyebrow">PERSONAL TRIP PLANNER</p>
+            <h1>把你的想法，<br /><em>变成清晰的旅行计划。</em></h1>
+            <p class="hero-copy">告诉我出发地、目的地、日期、预算和偏好。我会整理航班、酒店和每天的游玩安排，供你确认。</p>
+          </div>
+        </section>
+
+        <div class="user-main-column">
+          <section class="card request-card">
+            <div class="card-title-row">
+              <div><p class="eyebrow">NEW PLAN</p><h2>说说这次想怎么旅行</h2></div>
+              <button id="example-button" class="text-button" type="button">填入示例</button>
+            </div>
+
+            <form id="plan-form">
+              <label class="field-label" for="message">旅行描述</label>
+              <textarea id="message" name="message" rows="5" maxlength="10000" placeholder="例如：2026 年 7 月 2 日从杭州去成都玩三天，预算 4000，想住安静一点，行程不要太赶。" required></textarea>
+              <div class="form-grid">
+                <label><span class="field-label">用户 ID</span><input id="user-id" name="user_id" value="user_001" maxlength="64" required /></label>
+                <label><span class="field-label">相对日期基准 <small>可选</small></span><input id="reference-date" name="reference_date" type="date" /></label>
+              </div>
+              <div class="form-footer">
+                <p>当前为演示数据环境，不会执行真实预订或支付。</p>
+                <button id="submit-button" class="button button-primary" type="submit"><span class="button-label">生成旅行方案</span><span class="button-loader" aria-hidden="true"></span></button>
+              </div>
+            </form>
+          </section>
+
+          <section id="user-result-card" class="card result-card is-empty" aria-live="polite">
+            <div class="empty-state"><span class="empty-icon" aria-hidden="true">⌁</span><h2>你的旅行方案会在这里出现</h2><p>生成后，你会看到往返交通、住宿、预算和每天的具体行程安排。</p></div>
+            <div id="user-result-content" hidden></div>
+          </section>
+        </div>
+      </section>
+
+      <!--
+        管理员页刻意与用户方案分离。它只读取 TravelRunResponse 的公开白名单
+        字段；不会读取 Prompt、Checkpoint 原文、用户画像或 Evidence 正文。
+      -->
+      <section id="manager-page" class="page-view" role="tabpanel" aria-labelledby="manager-page-button" hidden>
+        <section class="manager-heading">
+          <div>
+            <p class="eyebrow">OPERATIONS CONSOLE</p>
+            <h1>运行状态与<br /><em>公开诊断信息。</em></h1>
+            <p class="hero-copy">用于查看当前会话、Verifier 摘要、公开 Trace 与后端返回的失败详情。</p>
+          </div>
+          <div class="connection-card"><span id="connection-dot" class="connection-dot"></span><span id="connection-label">准备连接服务</span></div>
+        </section>
+
+        <section class="workspace manager-workspace">
+          <aside class="session-panel">
+            <div class="panel-heading"><p class="eyebrow">CURRENT SESSION</p><h2>当前运行</h2></div>
+            <div id="status-card" class="status-card status-idle" aria-live="polite"><span class="status-icon">○</span><div><strong id="status-title">等待规划</strong><p id="status-description">用户提交需求后，这里会显示工作流状态。</p></div></div>
+            <dl class="session-meta">
+              <div><dt>Thread</dt><dd id="thread-id">—</dd></div>
+              <div><dt>Run</dt><dd id="run-id">—</dd></div>
+              <div><dt>Verifier</dt><dd id="verifier-status">—</dd></div>
+            </dl>
+            <button id="refresh-button" class="button button-secondary" type="button" disabled><span aria-hidden="true">↻</span> 刷新当前状态</button>
+            <p class="session-note">本页显示的是后端公开摘要，供演示和排障使用。</p>
+          </aside>
+
+          <section id="manager-result-card" class="card result-card is-empty" aria-live="polite">
+            <div class="empty-state"><span class="empty-icon" aria-hidden="true">⌁</span><h2>尚无运行记录</h2><p>请先在“用户方案”页面提交一次旅行需求。</p></div>
+            <div id="manager-result-content" hidden></div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <dialog id="decision-dialog" class="decision-dialog">
+      <form id="decision-form" method="dialog">
+        <div class="dialog-header"><div><p id="decision-eyebrow" class="eyebrow">HUMAN DECISION</p><h2 id="decision-title">确认这个方案？</h2></div><button id="dialog-close" class="icon-button" type="button" aria-label="关闭">×</button></div>
+        <p id="decision-description" class="dialog-copy"></p>
+        <label id="reason-field"><span class="field-label">备注 <small>可选</small></span><input id="decision-reason" maxlength="1000" placeholder="可记录确认或取消原因" /></label>
+        <div class="dialog-actions"><button id="decision-cancel" class="button button-secondary" type="button">返回</button><button id="decision-submit" class="button button-primary" type="submit">提交决定</button></div>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="/assets/app.js"></script>
+  </body>
+</html>

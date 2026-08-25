@@ -1,0 +1,1599 @@
+{
+  "schema_version": "workflow_eval_v1",
+  "dataset_case_count": 32,
+  "category_counts": {
+    "request_extraction": 5,
+    "policy_safety": 4,
+    "tool_data": 5,
+    "rag": 6,
+    "verifier": 5,
+    "hitl_revision": 4,
+    "commit_idempotency": 3
+  },
+  "scenario_counts": {
+    "approve": 10,
+    "clarify": 2,
+    "safe_reject": 2,
+    "cancel": 2,
+    "invalid_decision": 2,
+    "no_candidates": 2,
+    "budget_infeasible": 2,
+    "evidence_repair": 3,
+    "verifier_fault": 5,
+    "revision": 2
+  },
+  "summary": {
+    "task_success_rate": 1.0,
+    "expected_path_accuracy": 1.0,
+    "expected_tool_precision": 1.0,
+    "expected_tool_recall": 1.0,
+    "verifier_detection_recall": 1.0,
+    "verifier_false_positive_rate": 0.0,
+    "no_side_effect_before_approval": 1.0,
+    "revision_merge_correctness": 1.0,
+    "commit_idempotency": 1.0,
+    "grounded_citation_rate": 1.0,
+    "mean_latency_ms": 176.91609375,
+    "p95_latency_ms": 321.32974999999993
+  },
+  "observations": [
+    {
+      "case_id": "workflow_request_001",
+      "category": "request_extraction",
+      "scenario": "approve",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 568.473,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_request_002",
+      "category": "request_extraction",
+      "scenario": "approve",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 210.501,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_request_003",
+      "category": "request_extraction",
+      "scenario": "clarify",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "clarify",
+        "final_response"
+      ],
+      "actual_tools": [],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 105.471,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": null,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_request_004",
+      "category": "request_extraction",
+      "scenario": "clarify",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "clarify",
+        "final_response"
+      ],
+      "actual_tools": [],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 103.68,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": null,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_request_005",
+      "category": "request_extraction",
+      "scenario": "approve",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 213.262,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_policy_001",
+      "category": "policy_safety",
+      "scenario": "safe_reject",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "safe_reject",
+        "final_response"
+      ],
+      "actual_tools": [],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 108.651,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": null,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_policy_002",
+      "category": "policy_safety",
+      "scenario": "safe_reject",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "safe_reject",
+        "final_response"
+      ],
+      "actual_tools": [],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 107.241,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": null,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_policy_003",
+      "category": "policy_safety",
+      "scenario": "cancel",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "cancel",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 177.678,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_policy_004",
+      "category": "policy_safety",
+      "scenario": "invalid_decision",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "decision_gate",
+        "decision_gate",
+        "cancel",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 368.165,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_tool_001",
+      "category": "tool_data",
+      "scenario": "no_candidates",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 107.056,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": null,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_tool_002",
+      "category": "tool_data",
+      "scenario": "no_candidates",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 110.965,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": null,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_tool_003",
+      "category": "tool_data",
+      "scenario": "budget_infeasible",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 108.864,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": null,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_tool_004",
+      "category": "tool_data",
+      "scenario": "budget_infeasible",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 110.281,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": null,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_tool_005",
+      "category": "tool_data",
+      "scenario": "approve",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 210.555,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_rag_001",
+      "category": "rag",
+      "scenario": "evidence_repair",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 212.446,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_rag_002",
+      "category": "rag",
+      "scenario": "approve",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 213.572,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_rag_003",
+      "category": "rag",
+      "scenario": "approve",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 212.839,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_rag_004",
+      "category": "rag",
+      "scenario": "evidence_repair",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 213.509,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_rag_005",
+      "category": "rag",
+      "scenario": "approve",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 209.187,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_rag_006",
+      "category": "rag",
+      "scenario": "approve",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 206.769,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_verifier_001",
+      "category": "verifier",
+      "scenario": "verifier_fault",
+      "actual_path": [
+        "verifier"
+      ],
+      "actual_tools": [],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "interrupt": false,
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": true
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 12.002,
+      "verifier_issue_types": [
+        "selected_candidate_not_in_ranked_pool",
+        "selected_combination_id_mismatch",
+        "locked_fact_value_mismatch",
+        "hotel_context_without_evidence"
+      ],
+      "grounded_citation_rate": null,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_verifier_002",
+      "category": "verifier",
+      "scenario": "verifier_fault",
+      "actual_path": [
+        "verifier"
+      ],
+      "actual_tools": [],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "interrupt": false,
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": true
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 11.559,
+      "verifier_issue_types": [
+        "locked_fact_value_mismatch",
+        "known_subtotal_arithmetic_error",
+        "remaining_budget_mismatch"
+      ],
+      "grounded_citation_rate": null,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_verifier_003",
+      "category": "verifier",
+      "scenario": "verifier_fault",
+      "actual_path": [
+        "verifier"
+      ],
+      "actual_tools": [],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "interrupt": false,
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": true
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 12.782,
+      "verifier_issue_types": [
+        "proposal_result_evidence_mismatch",
+        "knowledge_activity_missing_guide",
+        "unknown_evidence_ref",
+        "source_catalog_mismatch",
+        "proposal_id_mismatch"
+      ],
+      "grounded_citation_rate": null,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_verifier_004",
+      "category": "verifier",
+      "scenario": "verifier_fault",
+      "actual_path": [
+        "verifier"
+      ],
+      "actual_tools": [],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "interrupt": false,
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": true
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 12.086,
+      "verifier_issue_types": [
+        "rain_day_all_outdoor",
+        "proposal_id_mismatch"
+      ],
+      "grounded_citation_rate": null,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_verifier_005",
+      "category": "verifier",
+      "scenario": "verifier_fault",
+      "actual_path": [
+        "verifier"
+      ],
+      "actual_tools": [],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "interrupt": false,
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": true
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 11.743,
+      "verifier_issue_types": [
+        "real_booking_claim",
+        "proposal_id_mismatch"
+      ],
+      "grounded_citation_rate": null,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_hitl_001",
+      "category": "hitl_revision",
+      "scenario": "revision",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "revision_analyze",
+        "apply_revision",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels",
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 276.736,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_hitl_002",
+      "category": "hitl_revision",
+      "scenario": "revision",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "revision_analyze",
+        "apply_revision",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels",
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 283.01,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_hitl_003",
+      "category": "hitl_revision",
+      "scenario": "cancel",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "cancel",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 179.978,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_hitl_004",
+      "category": "hitl_revision",
+      "scenario": "invalid_decision",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "decision_gate",
+        "decision_gate",
+        "cancel",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": false,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 278.51,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_commit_001",
+      "category": "commit_idempotency",
+      "scenario": "approve",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 229.906,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_commit_002",
+      "category": "commit_idempotency",
+      "scenario": "approve",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 240.041,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    },
+    {
+      "case_id": "workflow_commit_003",
+      "category": "commit_idempotency",
+      "scenario": "evidence_repair",
+      "actual_path": [
+        "input_extract",
+        "missing_info_check",
+        "safety_check",
+        "memory_read",
+        "planning_context",
+        "tool_plan",
+        "tool_execute",
+        "tool_check",
+        "candidate_rank",
+        "budget_optimize",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "retrieval_plan",
+        "hybrid_retrieve",
+        "rerank",
+        "evidence_grade",
+        "proposal",
+        "verifier",
+        "decision_gate",
+        "decision_gate",
+        "commit_draft",
+        "final_response"
+      ],
+      "actual_tools": [
+        "get_weather",
+        "search_flights",
+        "search_hotels"
+      ],
+      "checks": {
+        "path": true,
+        "tool_precision": true,
+        "tool_recall": true,
+        "interrupt": true,
+        "no_side_effect_before_approval": true,
+        "revision_merge": true,
+        "commit_idempotency": true,
+        "verifier_detection": true
+      },
+      "applicable": {
+        "revision_merge": false,
+        "commit_idempotency": true,
+        "verifier_detection": false
+      },
+      "passed": true,
+      "failed_checks": [],
+      "latency_ms": 233.797,
+      "verifier_issue_types": [],
+      "grounded_citation_rate": 1.0,
+      "verifier_clean_pass": true
+    }
+  ],
+  "bad_cases": [],
+  "execution_boundary": {
+    "graph": "production StateGraph topology and DecisionGate interrupt/resume",
+    "deterministic_substitutes": "LLM, MCP, Chroma, and external tools are replaced by deterministic test doubles",
+    "verifier": "real ProposalVerifier with fault-injected valid Proposal state",
+    "commit": "real CommitDraftService with isolated in-memory SQLite"
+  }
+}

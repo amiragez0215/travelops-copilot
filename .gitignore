@@ -1,0 +1,48 @@
+# Virtual environments
+.venv/
+venv/
+
+# Python caches / test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Secrets
+.env
+
+# Local database files
+*.db
+data/db/*
+!data/db/.gitkeep
+
+# Generated Chroma vector database
+data/vector_store/*
+!data/vector_store/.gitkeep
+
+# Unreviewed generated datasets; integrate only after data / Gold-label audit.
+data/staging/
+
+# Local recovery snapshots. They can contain old databases, vector stores and
+# duplicate source files; versioned project code must live outside this folder.
+backups/
+
+# Downloaded local models
+models/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+*.zip
+
+# IDE / OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/

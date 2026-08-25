@@ -1,0 +1,1006 @@
+{
+  "provider": "mock_hotel_provider",
+  "version": 4,
+  "scope": {
+    "date_start": "2026-10-01",
+    "date_end": "2026-10-07",
+    "cities": [
+      "杭州",
+      "北京",
+      "上海"
+    ]
+  },
+  "currency": "CNY",
+  "items": [
+    {
+      "hotel_id": "hotel_hgh_01",
+      "name": "杭州拱墅区轻住酒店01",
+      "city": "杭州",
+      "district": "拱墅区",
+      "address": "杭州拱墅区示例路1号，靠近杭州东站",
+      "price_per_night": 268,
+      "rating": 4.2,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 255,
+      "quiet_score": 0.72,
+      "cleanliness_score": 0.88,
+      "hotel_type": "经济型",
+      "tags": [
+        "经济型",
+        "拱墅区",
+        "示例可订",
+        "近杭州东站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_hgh_02",
+      "name": "杭州拱墅区轻住酒店02",
+      "city": "杭州",
+      "district": "拱墅区",
+      "address": "杭州拱墅区示例路2号，靠近杭州东站",
+      "price_per_night": 318,
+      "rating": 4.3,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 290,
+      "quiet_score": 0.76,
+      "cleanliness_score": 0.88,
+      "hotel_type": "经济型",
+      "tags": [
+        "经济型",
+        "拱墅区",
+        "示例可订",
+        "近杭州东站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_hgh_03",
+      "name": "杭州武林商圈城市精选03",
+      "city": "杭州",
+      "district": "拱墅区",
+      "address": "杭州拱墅区示例路3号，靠近杭州东站",
+      "price_per_night": 498,
+      "rating": 4.5,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 325,
+      "quiet_score": 0.84,
+      "cleanliness_score": 0.88,
+      "hotel_type": "中档型",
+      "tags": [
+        "中档型",
+        "拱墅区",
+        "示例可订",
+        "近杭州东站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_hgh_04",
+      "name": "杭州武林商圈城市精选04",
+      "city": "杭州",
+      "district": "拱墅区",
+      "address": "杭州拱墅区示例路4号，靠近杭州东站",
+      "price_per_night": 568,
+      "rating": 4.6,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 360,
+      "quiet_score": 0.86,
+      "cleanliness_score": 0.88,
+      "hotel_type": "中档型",
+      "tags": [
+        "中档型",
+        "拱墅区",
+        "示例可订",
+        "近杭州东站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_hgh_05",
+      "name": "杭州武林商圈云庭酒店05",
+      "city": "杭州",
+      "district": "拱墅区",
+      "address": "杭州拱墅区示例路5号，靠近杭州东站",
+      "price_per_night": 828,
+      "rating": 4.7,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 395,
+      "quiet_score": 0.9,
+      "cleanliness_score": 0.88,
+      "hotel_type": "高档型",
+      "tags": [
+        "高档型",
+        "拱墅区",
+        "示例可订",
+        "近杭州东站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_hgh_06",
+      "name": "杭州武林商圈云庭酒店06",
+      "city": "杭州",
+      "district": "拱墅区",
+      "address": "杭州拱墅区示例路6号，靠近杭州东站",
+      "price_per_night": 1080,
+      "rating": 4.8,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 430,
+      "quiet_score": 0.93,
+      "cleanliness_score": 0.88,
+      "hotel_type": "高档型",
+      "tags": [
+        "高档型",
+        "拱墅区",
+        "示例可订",
+        "近杭州东站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_hgh_07",
+      "name": "杭州杭州东站换乘酒店07",
+      "city": "杭州",
+      "district": "拱墅区",
+      "address": "杭州拱墅区示例路7号，靠近杭州东站",
+      "price_per_night": 458,
+      "rating": 4.5,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 465,
+      "quiet_score": 0.82,
+      "cleanliness_score": 0.88,
+      "hotel_type": "地铁便利",
+      "tags": [
+        "地铁便利",
+        "拱墅区",
+        "示例可订",
+        "近杭州东站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_hgh_08",
+      "name": "杭州武林商圈步行酒店08",
+      "city": "杭州",
+      "district": "拱墅区",
+      "address": "杭州拱墅区示例路8号，靠近杭州东站",
+      "price_per_night": 628,
+      "rating": 4.6,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 500,
+      "quiet_score": 0.78,
+      "cleanliness_score": 0.88,
+      "hotel_type": "商圈便利",
+      "tags": [
+        "商圈便利",
+        "拱墅区",
+        "示例可订",
+        "近杭州东站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_hgh_09",
+      "name": "杭州拱墅区静巷酒店09",
+      "city": "杭州",
+      "district": "拱墅区",
+      "address": "杭州拱墅区示例路9号，靠近杭州东站",
+      "price_per_night": 528,
+      "rating": 4.6,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 535,
+      "quiet_score": 0.96,
+      "cleanliness_score": 0.88,
+      "hotel_type": "安静型",
+      "tags": [
+        "安静型",
+        "拱墅区",
+        "示例可订",
+        "近杭州东站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_hgh_10",
+      "name": "杭州拱墅区静巷酒店10",
+      "city": "杭州",
+      "district": "拱墅区",
+      "address": "杭州拱墅区示例路10号，靠近杭州东站",
+      "price_per_night": 688,
+      "rating": 4.7,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 570,
+      "quiet_score": 0.98,
+      "cleanliness_score": 0.88,
+      "hotel_type": "安静型",
+      "tags": [
+        "安静型",
+        "拱墅区",
+        "示例可订",
+        "近杭州东站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_hgh_11",
+      "name": "杭州旧站口特价客房11",
+      "city": "杭州",
+      "district": "拱墅区",
+      "address": "杭州拱墅区示例路11号，靠近杭州东站",
+      "price_per_night": 238,
+      "rating": 3.4,
+      "available_rooms": 1,
+      "near_subway": false,
+      "distance_to_subway_meters": 1180,
+      "quiet_score": 0.36,
+      "cleanliness_score": 0.61,
+      "hotel_type": "明显不足",
+      "tags": [
+        "明显不足",
+        "拱墅区",
+        "示例可订",
+        "近杭州东站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "不可免费取消",
+      "notes": "公共区域和隔音维护较弱，适合作为价格敏感的备选",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_pek_01",
+      "name": "北京东城区轻住酒店01",
+      "city": "北京",
+      "district": "东城区",
+      "address": "北京东城区示例路1号，靠近北京站",
+      "price_per_night": 268,
+      "rating": 4.2,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 255,
+      "quiet_score": 0.72,
+      "cleanliness_score": 0.88,
+      "hotel_type": "经济型",
+      "tags": [
+        "经济型",
+        "东城区",
+        "示例可订",
+        "近北京站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_pek_02",
+      "name": "北京东城区轻住酒店02",
+      "city": "北京",
+      "district": "东城区",
+      "address": "北京东城区示例路2号，靠近北京站",
+      "price_per_night": 318,
+      "rating": 4.3,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 290,
+      "quiet_score": 0.76,
+      "cleanliness_score": 0.88,
+      "hotel_type": "经济型",
+      "tags": [
+        "经济型",
+        "东城区",
+        "示例可订",
+        "近北京站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_pek_03",
+      "name": "北京朝阳商圈城市精选03",
+      "city": "北京",
+      "district": "东城区",
+      "address": "北京东城区示例路3号，靠近北京站",
+      "price_per_night": 498,
+      "rating": 4.5,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 325,
+      "quiet_score": 0.84,
+      "cleanliness_score": 0.88,
+      "hotel_type": "中档型",
+      "tags": [
+        "中档型",
+        "东城区",
+        "示例可订",
+        "近北京站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_pek_04",
+      "name": "北京朝阳商圈城市精选04",
+      "city": "北京",
+      "district": "东城区",
+      "address": "北京东城区示例路4号，靠近北京站",
+      "price_per_night": 568,
+      "rating": 4.6,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 360,
+      "quiet_score": 0.86,
+      "cleanliness_score": 0.88,
+      "hotel_type": "中档型",
+      "tags": [
+        "中档型",
+        "东城区",
+        "示例可订",
+        "近北京站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_pek_05",
+      "name": "北京朝阳商圈云庭酒店05",
+      "city": "北京",
+      "district": "东城区",
+      "address": "北京东城区示例路5号，靠近北京站",
+      "price_per_night": 828,
+      "rating": 4.7,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 395,
+      "quiet_score": 0.9,
+      "cleanliness_score": 0.88,
+      "hotel_type": "高档型",
+      "tags": [
+        "高档型",
+        "东城区",
+        "示例可订",
+        "近北京站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_pek_06",
+      "name": "北京朝阳商圈云庭酒店06",
+      "city": "北京",
+      "district": "东城区",
+      "address": "北京东城区示例路6号，靠近北京站",
+      "price_per_night": 1080,
+      "rating": 4.8,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 430,
+      "quiet_score": 0.93,
+      "cleanliness_score": 0.88,
+      "hotel_type": "高档型",
+      "tags": [
+        "高档型",
+        "东城区",
+        "示例可订",
+        "近北京站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_pek_07",
+      "name": "北京北京站换乘酒店07",
+      "city": "北京",
+      "district": "东城区",
+      "address": "北京东城区示例路7号，靠近北京站",
+      "price_per_night": 458,
+      "rating": 4.5,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 465,
+      "quiet_score": 0.82,
+      "cleanliness_score": 0.88,
+      "hotel_type": "地铁便利",
+      "tags": [
+        "地铁便利",
+        "东城区",
+        "示例可订",
+        "近北京站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_pek_08",
+      "name": "北京朝阳商圈步行酒店08",
+      "city": "北京",
+      "district": "东城区",
+      "address": "北京东城区示例路8号，靠近北京站",
+      "price_per_night": 628,
+      "rating": 4.6,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 500,
+      "quiet_score": 0.78,
+      "cleanliness_score": 0.88,
+      "hotel_type": "商圈便利",
+      "tags": [
+        "商圈便利",
+        "东城区",
+        "示例可订",
+        "近北京站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_pek_09",
+      "name": "北京东城区静巷酒店09",
+      "city": "北京",
+      "district": "东城区",
+      "address": "北京东城区示例路9号，靠近北京站",
+      "price_per_night": 528,
+      "rating": 4.6,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 535,
+      "quiet_score": 0.96,
+      "cleanliness_score": 0.88,
+      "hotel_type": "安静型",
+      "tags": [
+        "安静型",
+        "东城区",
+        "示例可订",
+        "近北京站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_pek_10",
+      "name": "北京东城区静巷酒店10",
+      "city": "北京",
+      "district": "东城区",
+      "address": "北京东城区示例路10号，靠近北京站",
+      "price_per_night": 688,
+      "rating": 4.7,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 570,
+      "quiet_score": 0.98,
+      "cleanliness_score": 0.88,
+      "hotel_type": "安静型",
+      "tags": [
+        "安静型",
+        "东城区",
+        "示例可订",
+        "近北京站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_pek_11",
+      "name": "北京旧站口特价客房11",
+      "city": "北京",
+      "district": "东城区",
+      "address": "北京东城区示例路11号，靠近北京站",
+      "price_per_night": 238,
+      "rating": 3.4,
+      "available_rooms": 1,
+      "near_subway": false,
+      "distance_to_subway_meters": 1180,
+      "quiet_score": 0.36,
+      "cleanliness_score": 0.61,
+      "hotel_type": "明显不足",
+      "tags": [
+        "明显不足",
+        "东城区",
+        "示例可订",
+        "近北京站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "不可免费取消",
+      "notes": "公共区域和隔音维护较弱，适合作为价格敏感的备选",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_sha_01",
+      "name": "上海静安区轻住酒店01",
+      "city": "上海",
+      "district": "静安区",
+      "address": "上海静安区示例路1号，靠近上海虹桥站",
+      "price_per_night": 268,
+      "rating": 4.2,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 255,
+      "quiet_score": 0.72,
+      "cleanliness_score": 0.88,
+      "hotel_type": "经济型",
+      "tags": [
+        "经济型",
+        "静安区",
+        "示例可订",
+        "近上海虹桥站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_sha_02",
+      "name": "上海静安区轻住酒店02",
+      "city": "上海",
+      "district": "静安区",
+      "address": "上海静安区示例路2号，靠近上海虹桥站",
+      "price_per_night": 318,
+      "rating": 4.3,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 290,
+      "quiet_score": 0.76,
+      "cleanliness_score": 0.88,
+      "hotel_type": "经济型",
+      "tags": [
+        "经济型",
+        "静安区",
+        "示例可订",
+        "近上海虹桥站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_sha_03",
+      "name": "上海人民广场商圈城市精选03",
+      "city": "上海",
+      "district": "静安区",
+      "address": "上海静安区示例路3号，靠近上海虹桥站",
+      "price_per_night": 498,
+      "rating": 4.5,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 325,
+      "quiet_score": 0.84,
+      "cleanliness_score": 0.88,
+      "hotel_type": "中档型",
+      "tags": [
+        "中档型",
+        "静安区",
+        "示例可订",
+        "近上海虹桥站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_sha_04",
+      "name": "上海人民广场商圈城市精选04",
+      "city": "上海",
+      "district": "静安区",
+      "address": "上海静安区示例路4号，靠近上海虹桥站",
+      "price_per_night": 568,
+      "rating": 4.6,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 360,
+      "quiet_score": 0.86,
+      "cleanliness_score": 0.88,
+      "hotel_type": "中档型",
+      "tags": [
+        "中档型",
+        "静安区",
+        "示例可订",
+        "近上海虹桥站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_sha_05",
+      "name": "上海人民广场商圈云庭酒店05",
+      "city": "上海",
+      "district": "静安区",
+      "address": "上海静安区示例路5号，靠近上海虹桥站",
+      "price_per_night": 828,
+      "rating": 4.7,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 395,
+      "quiet_score": 0.9,
+      "cleanliness_score": 0.88,
+      "hotel_type": "高档型",
+      "tags": [
+        "高档型",
+        "静安区",
+        "示例可订",
+        "近上海虹桥站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_sha_06",
+      "name": "上海人民广场商圈云庭酒店06",
+      "city": "上海",
+      "district": "静安区",
+      "address": "上海静安区示例路6号，靠近上海虹桥站",
+      "price_per_night": 1080,
+      "rating": 4.8,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 430,
+      "quiet_score": 0.93,
+      "cleanliness_score": 0.88,
+      "hotel_type": "高档型",
+      "tags": [
+        "高档型",
+        "静安区",
+        "示例可订",
+        "近上海虹桥站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_sha_07",
+      "name": "上海上海虹桥站换乘酒店07",
+      "city": "上海",
+      "district": "静安区",
+      "address": "上海静安区示例路7号，靠近上海虹桥站",
+      "price_per_night": 458,
+      "rating": 4.5,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 465,
+      "quiet_score": 0.82,
+      "cleanliness_score": 0.88,
+      "hotel_type": "地铁便利",
+      "tags": [
+        "地铁便利",
+        "静安区",
+        "示例可订",
+        "近上海虹桥站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_sha_08",
+      "name": "上海人民广场商圈步行酒店08",
+      "city": "上海",
+      "district": "静安区",
+      "address": "上海静安区示例路8号，靠近上海虹桥站",
+      "price_per_night": 628,
+      "rating": 4.6,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 500,
+      "quiet_score": 0.78,
+      "cleanliness_score": 0.88,
+      "hotel_type": "商圈便利",
+      "tags": [
+        "商圈便利",
+        "静安区",
+        "示例可订",
+        "近上海虹桥站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_sha_09",
+      "name": "上海静安区静巷酒店09",
+      "city": "上海",
+      "district": "静安区",
+      "address": "上海静安区示例路9号，靠近上海虹桥站",
+      "price_per_night": 528,
+      "rating": 4.6,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 535,
+      "quiet_score": 0.96,
+      "cleanliness_score": 0.88,
+      "hotel_type": "安静型",
+      "tags": [
+        "安静型",
+        "静安区",
+        "示例可订",
+        "近上海虹桥站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_sha_10",
+      "name": "上海静安区静巷酒店10",
+      "city": "上海",
+      "district": "静安区",
+      "address": "上海静安区示例路10号，靠近上海虹桥站",
+      "price_per_night": 688,
+      "rating": 4.7,
+      "available_rooms": 2,
+      "near_subway": true,
+      "distance_to_subway_meters": 570,
+      "quiet_score": 0.98,
+      "cleanliness_score": 0.88,
+      "hotel_type": "安静型",
+      "tags": [
+        "安静型",
+        "静安区",
+        "示例可订",
+        "近上海虹桥站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "入住前24小时可免费取消",
+      "notes": "房型、价格和可取消条款以预订时为准",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    },
+    {
+      "hotel_id": "hotel_sha_11",
+      "name": "上海旧站口特价客房11",
+      "city": "上海",
+      "district": "静安区",
+      "address": "上海静安区示例路11号，靠近上海虹桥站",
+      "price_per_night": 238,
+      "rating": 3.4,
+      "available_rooms": 1,
+      "near_subway": false,
+      "distance_to_subway_meters": 1180,
+      "quiet_score": 0.36,
+      "cleanliness_score": 0.61,
+      "hotel_type": "明显不足",
+      "tags": [
+        "明显不足",
+        "静安区",
+        "示例可订",
+        "近上海虹桥站"
+      ],
+      "amenities": [
+        "WiFi",
+        "空调",
+        "行李寄存",
+        "自助洗衣"
+      ],
+      "cancel_policy": "不可免费取消",
+      "notes": "公共区域和隔音维护较弱，适合作为价格敏感的备选",
+      "updated_at": "2026-09-30T09:00:00+08:00"
+    }
+  ]
+}

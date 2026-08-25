@@ -1,0 +1,923 @@
+{
+  "version": 2,
+  "description": "Merged baseline plus multi-city seed data for workflow and retrieval evaluation.",
+  "users": [
+    {
+      "user_id": "user_001",
+      "name": "林晓",
+      "home_city": "杭州",
+      "created_at": "2026-08-01T09:00:00+08:00"
+    },
+    {
+      "user_id": "user_002",
+      "name": "测试用户无画像",
+      "home_city": "上海",
+      "created_at": "2026-08-01T09:00:00+08:00"
+    },
+    {
+      "user_id": "user_003",
+      "name": "周航",
+      "home_city": "上海",
+      "created_at": "2026-08-01T09:00:00+08:00"
+    },
+    {
+      "user_id": "user_004",
+      "name": "陈岚",
+      "home_city": "杭州",
+      "created_at": "2026-08-01T09:00:00+08:00"
+    },
+    {
+      "user_id": "user_005",
+      "name": "吴敏",
+      "home_city": "南京",
+      "created_at": "2026-08-01T09:00:00+08:00"
+    },
+    {
+      "user_id": "user_006",
+      "name": "赵然",
+      "home_city": "北京",
+      "created_at": "2026-08-01T09:00:00+08:00"
+    },
+    {
+      "user_id": "user_007",
+      "name": "宋晨",
+      "home_city": "上海",
+      "created_at": "2026-08-01T09:00:00+08:00"
+    },
+    {
+      "user_id": "user_008",
+      "name": "何欣",
+      "home_city": "杭州",
+      "created_at": "2026-08-01T09:00:00+08:00"
+    }
+  ],
+  "user_profiles": [
+    {
+      "user_id": "user_001",
+      "flight_preferences_json": {
+        "avoid_early_flight": 0.7,
+        "prefer_direct": 0.8,
+        "avoid_late_arrival": 0.65
+      },
+      "hotel_preferences_json": {
+        "quiet": 0.85,
+        "near_subway": 0.75,
+        "high_rating": 0.7,
+        "cleanliness": 0.8
+      },
+      "activity_preferences_json": {
+        "food": 0.65,
+        "culture_history": 0.65,
+        "city_walk": 0.45,
+        "indoor": 0.55
+      },
+      "pace_preferences_json": {
+        "slow": 0.65,
+        "low_walking_intensity": 0.6,
+        "packed_schedule": 0.25
+      },
+      "diet_preferences_json": {
+        "spicy_tolerance": "medium",
+        "likes": [
+          "川菜",
+          "茶馆"
+        ],
+        "avoid_foods": [
+          "生冷海鲜"
+        ]
+      },
+      "budget_preferences_json": {
+        "budget_sensitivity": 0.65,
+        "preferred_hotel_price_max": 700,
+        "preferred_total_budget_range": [
+          2800,
+          5200
+        ]
+      },
+      "risk_preferences_json": {
+        "weather_sensitive": 0.7,
+        "avoid_crowds": 0.45,
+        "risk_tolerance": 0.3
+      },
+      "profile_notes_json": [
+        "慢节奏与安静住宿",
+        "本记录为合成测试画像，行程前仍需确认即时偏好。"
+      ]
+    },
+    {
+      "user_id": "user_003",
+      "flight_preferences_json": {
+        "avoid_early_flight": 0.7,
+        "prefer_direct": 0.8,
+        "avoid_late_arrival": 0.65
+      },
+      "hotel_preferences_json": {
+        "quiet": 0.55,
+        "near_subway": 0.75,
+        "high_rating": 0.7,
+        "cleanliness": 0.8
+      },
+      "activity_preferences_json": {
+        "food": 0.65,
+        "culture_history": 0.65,
+        "city_walk": 0.45,
+        "indoor": 0.55
+      },
+      "pace_preferences_json": {
+        "slow": 0.65,
+        "low_walking_intensity": 0.6,
+        "packed_schedule": 0.25
+      },
+      "diet_preferences_json": {
+        "spicy_tolerance": "medium",
+        "likes": [
+          "清淡午餐"
+        ],
+        "avoid_foods": [
+          "过量酒精"
+        ]
+      },
+      "budget_preferences_json": {
+        "budget_sensitivity": 0.65,
+        "preferred_hotel_price_max": 700,
+        "preferred_total_budget_range": [
+          2800,
+          5200
+        ]
+      },
+      "risk_preferences_json": {
+        "weather_sensitive": 0.7,
+        "avoid_crowds": 0.45,
+        "risk_tolerance": 0.3
+      },
+      "profile_notes_json": [
+        "商务短住与准点抵达",
+        "本记录为合成测试画像，行程前仍需确认即时偏好。"
+      ]
+    },
+    {
+      "user_id": "user_004",
+      "flight_preferences_json": {
+        "avoid_early_flight": 0.7,
+        "prefer_direct": 0.8,
+        "avoid_late_arrival": 0.65
+      },
+      "hotel_preferences_json": {
+        "quiet": 0.75,
+        "near_subway": 0.75,
+        "high_rating": 0.7,
+        "cleanliness": 0.8
+      },
+      "activity_preferences_json": {
+        "food": 0.65,
+        "culture_history": 0.65,
+        "city_walk": 0.45,
+        "indoor": 0.55
+      },
+      "pace_preferences_json": {
+        "slow": 0.65,
+        "low_walking_intensity": 0.6,
+        "packed_schedule": 0.25
+      },
+      "diet_preferences_json": {
+        "spicy_tolerance": "low",
+        "likes": [
+          "不辣儿童餐"
+        ],
+        "avoid_foods": [
+          "花生"
+        ]
+      },
+      "budget_preferences_json": {
+        "budget_sensitivity": 0.65,
+        "preferred_hotel_price_max": 700,
+        "preferred_total_budget_range": [
+          2800,
+          5200
+        ]
+      },
+      "risk_preferences_json": {
+        "weather_sensitive": 0.7,
+        "avoid_crowds": 0.45,
+        "risk_tolerance": 0.3
+      },
+      "profile_notes_json": [
+        "亲子、低步行与可休息点",
+        "本记录为合成测试画像，行程前仍需确认即时偏好。"
+      ]
+    },
+    {
+      "user_id": "user_005",
+      "flight_preferences_json": {
+        "avoid_early_flight": 0.7,
+        "prefer_direct": 0.8,
+        "avoid_late_arrival": 0.65
+      },
+      "hotel_preferences_json": {
+        "quiet": 0.6,
+        "near_subway": 0.75,
+        "high_rating": 0.7,
+        "cleanliness": 0.8
+      },
+      "activity_preferences_json": {
+        "food": 0.65,
+        "culture_history": 0.65,
+        "city_walk": 0.45,
+        "indoor": 0.55
+      },
+      "pace_preferences_json": {
+        "slow": 0.65,
+        "low_walking_intensity": 0.6,
+        "packed_schedule": 0.25
+      },
+      "diet_preferences_json": {
+        "spicy_tolerance": "medium",
+        "likes": [
+          "小吃"
+        ],
+        "avoid_foods": []
+      },
+      "budget_preferences_json": {
+        "budget_sensitivity": 0.65,
+        "preferred_hotel_price_max": 700,
+        "preferred_total_budget_range": [
+          2800,
+          5200
+        ]
+      },
+      "risk_preferences_json": {
+        "weather_sensitive": 0.7,
+        "avoid_crowds": 0.45,
+        "risk_tolerance": 0.3
+      },
+      "profile_notes_json": [
+        "预算敏感、近地铁",
+        "本记录为合成测试画像，行程前仍需确认即时偏好。"
+      ]
+    },
+    {
+      "user_id": "user_006",
+      "flight_preferences_json": {
+        "avoid_early_flight": 0.7,
+        "prefer_direct": 0.8,
+        "avoid_late_arrival": 0.65
+      },
+      "hotel_preferences_json": {
+        "quiet": 0.9,
+        "near_subway": 0.75,
+        "high_rating": 0.7,
+        "cleanliness": 0.8
+      },
+      "activity_preferences_json": {
+        "food": 0.65,
+        "culture_history": 0.65,
+        "city_walk": 0.45,
+        "indoor": 0.55
+      },
+      "pace_preferences_json": {
+        "slow": 0.65,
+        "low_walking_intensity": 0.6,
+        "packed_schedule": 0.25
+      },
+      "diet_preferences_json": {
+        "spicy_tolerance": "medium",
+        "likes": [
+          "软食"
+        ],
+        "avoid_foods": []
+      },
+      "budget_preferences_json": {
+        "budget_sensitivity": 0.65,
+        "preferred_hotel_price_max": 700,
+        "preferred_total_budget_range": [
+          2800,
+          5200
+        ]
+      },
+      "risk_preferences_json": {
+        "weather_sensitive": 0.7,
+        "avoid_crowds": 0.45,
+        "risk_tolerance": 0.3
+      },
+      "profile_notes_json": [
+        "行动不便、无障碍优先",
+        "本记录为合成测试画像，行程前仍需确认即时偏好。"
+      ]
+    },
+    {
+      "user_id": "user_007",
+      "flight_preferences_json": {
+        "avoid_early_flight": 0.7,
+        "prefer_direct": 0.8,
+        "avoid_late_arrival": 0.65
+      },
+      "hotel_preferences_json": {
+        "quiet": 0.65,
+        "near_subway": 0.75,
+        "high_rating": 0.7,
+        "cleanliness": 0.8
+      },
+      "activity_preferences_json": {
+        "food": 0.65,
+        "culture_history": 0.65,
+        "city_walk": 0.45,
+        "indoor": 0.55
+      },
+      "pace_preferences_json": {
+        "slow": 0.65,
+        "low_walking_intensity": 0.6,
+        "packed_schedule": 0.25
+      },
+      "diet_preferences_json": {
+        "spicy_tolerance": "medium",
+        "likes": [
+          "咖啡"
+        ],
+        "avoid_foods": []
+      },
+      "budget_preferences_json": {
+        "budget_sensitivity": 0.65,
+        "preferred_hotel_price_max": 700,
+        "preferred_total_budget_range": [
+          2800,
+          5200
+        ]
+      },
+      "risk_preferences_json": {
+        "weather_sensitive": 0.7,
+        "avoid_crowds": 0.45,
+        "risk_tolerance": 0.3
+      },
+      "profile_notes_json": [
+        "轻量商务、可办公",
+        "本记录为合成测试画像，行程前仍需确认即时偏好。"
+      ]
+    },
+    {
+      "user_id": "user_008",
+      "flight_preferences_json": {
+        "avoid_early_flight": 0.7,
+        "prefer_direct": 0.8,
+        "avoid_late_arrival": 0.65
+      },
+      "hotel_preferences_json": {
+        "quiet": 0.7,
+        "near_subway": 0.75,
+        "high_rating": 0.7,
+        "cleanliness": 0.8
+      },
+      "activity_preferences_json": {
+        "food": 0.65,
+        "culture_history": 0.65,
+        "city_walk": 0.45,
+        "indoor": 0.55
+      },
+      "pace_preferences_json": {
+        "slow": 0.65,
+        "low_walking_intensity": 0.6,
+        "packed_schedule": 0.25
+      },
+      "diet_preferences_json": {
+        "spicy_tolerance": "low",
+        "likes": [
+          "水果"
+        ],
+        "avoid_foods": [
+          "重辣"
+        ]
+      },
+      "budget_preferences_json": {
+        "budget_sensitivity": 0.65,
+        "preferred_hotel_price_max": 700,
+        "preferred_total_budget_range": [
+          2800,
+          5200
+        ]
+      },
+      "risk_preferences_json": {
+        "weather_sensitive": 0.7,
+        "avoid_crowds": 0.45,
+        "risk_tolerance": 0.3
+      },
+      "profile_notes_json": [
+        "夏季避热与室内活动",
+        "本记录为合成测试画像，行程前仍需确认即时偏好。"
+      ]
+    }
+  ],
+  "trip_drafts": [
+    {
+      "trip_id": "trip_demo_proposed_001",
+      "user_id": "user_001",
+      "destination": "成都",
+      "date_start": "2026-07-02",
+      "date_end": "2026-07-04",
+      "budget": 4000,
+      "status": "proposed",
+      "created_at": "2026-07-01T12:00:00+08:00"
+    }
+  ],
+  "itinerary_versions": [
+    {
+      "version_id": "itv_demo_001_v1",
+      "trip_id": "trip_demo_proposed_001",
+      "version_no": 1,
+      "daily_plan": [
+        {
+          "day": 1,
+          "morning": "抵达成都并前往酒店",
+          "afternoon": "市区轻松游览",
+          "evening": "附近用餐并休息"
+        },
+        {
+          "day": 2,
+          "morning": "主要景点游览",
+          "afternoon": "根据天气安排室内或户外活动",
+          "evening": "体验当地餐饮"
+        },
+        {
+          "day": 3,
+          "morning": "文化景点或城市散步",
+          "afternoon": "返程准备",
+          "evening": "返程"
+        }
+      ],
+      "estimated_cost": 3800,
+      "change_reason": "initial_demo_seed",
+      "created_at": "2026-07-01T12:10:00+08:00"
+    }
+  ],
+  "booking_drafts": [],
+  "quote_snapshots": [
+    {
+      "snapshot_id": "quote_demo_001",
+      "tool_name": "flight_query",
+      "item_type": "flight",
+      "item_id": "flt_hgh_ctu_20260702_1120",
+      "price": 920,
+      "availability": 9,
+      "queried_at": "2026-07-01T12:00:00+08:00",
+      "valid_until": "2026-07-01T18:00:00+08:00"
+    },
+    {
+      "snapshot_id": "quote_demo_002",
+      "tool_name": "hotel_search",
+      "item_type": "hotel",
+      "item_id": "hotel_chengdu_qingyang_001",
+      "price": 520,
+      "availability": 4,
+      "queried_at": "2026-07-01T12:01:00+08:00",
+      "valid_until": "2026-07-01T18:01:00+08:00"
+    }
+  ],
+  "approval_logs": [
+    {
+      "approval_id": "approval_demo_001",
+      "trip_id": "trip_demo_proposed_001",
+      "action_type": "write_itinerary_version",
+      "payload": {
+        "version_no": 1,
+        "estimated_cost": 3800
+      },
+      "status": "pending",
+      "approved_at": null,
+      "rejected_reason": null
+    }
+  ],
+  "reminder_drafts": [],
+  "notification_drafts": [],
+  "action_logs": [
+    {
+      "action_log_id": "log_demo_001",
+      "workflow_name": "plan_trip",
+      "node_name": "decision_gate",
+      "tool_name": null,
+      "input_summary": "proposal generated with pending actions",
+      "output_summary": "waiting for approve/request_changes/cancel",
+      "status": "success",
+      "latency_ms": 5,
+      "created_at": "2026-07-01T12:10:00+08:00"
+    }
+  ],
+  "trip_history": [
+    {
+      "history_id": "history_demo_001",
+      "user_id": "user_001",
+      "trip_id": null,
+      "feedback_summary": "用户过去反馈更喜欢安静住宿和不太紧凑的行程。",
+      "preference_update": {
+        "hotel_preferences.quiet": 0.85,
+        "travel_style.pace": "slow"
+      },
+      "created_at": "2026-06-20T09:30:00+08:00"
+    },
+    {
+      "history_id": "history_v2_001",
+      "user_id": "user_001",
+      "trip_id": "trip_history_v2_001",
+      "destination": "成都",
+      "feedback_summary": "合成历史 1：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.55,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-06-05T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_002",
+      "user_id": "user_002",
+      "trip_id": "trip_history_v2_002",
+      "destination": "苏州",
+      "feedback_summary": "合成历史 2：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.63,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-06-06T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_003",
+      "user_id": "user_003",
+      "trip_id": "trip_history_v2_003",
+      "destination": "重庆",
+      "feedback_summary": "合成历史 3：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.71,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-06-07T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_004",
+      "user_id": "user_004",
+      "trip_id": "trip_history_v2_004",
+      "destination": "西安",
+      "feedback_summary": "合成历史 4：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.79,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-06-08T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_005",
+      "user_id": "user_005",
+      "trip_id": "trip_history_v2_005",
+      "destination": "成都",
+      "feedback_summary": "合成历史 5：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.55,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-06-09T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_006",
+      "user_id": "user_006",
+      "trip_id": "trip_history_v2_006",
+      "destination": "宁波",
+      "feedback_summary": "合成历史 6：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.63,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-06-10T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_007",
+      "user_id": "user_007",
+      "trip_id": "trip_history_v2_007",
+      "destination": "武汉",
+      "feedback_summary": "合成历史 7：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.71,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-06-11T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_008",
+      "user_id": "user_008",
+      "trip_id": "trip_history_v2_008",
+      "destination": "成都",
+      "feedback_summary": "合成历史 8：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.79,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-06-12T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_009",
+      "user_id": "user_001",
+      "trip_id": "trip_history_v2_009",
+      "destination": "成都",
+      "feedback_summary": "合成历史 9：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.55,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-07-05T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_010",
+      "user_id": "user_002",
+      "trip_id": "trip_history_v2_010",
+      "destination": "苏州",
+      "feedback_summary": "合成历史 10：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.63,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-07-06T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_011",
+      "user_id": "user_003",
+      "trip_id": "trip_history_v2_011",
+      "destination": "重庆",
+      "feedback_summary": "合成历史 11：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.71,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-07-07T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_012",
+      "user_id": "user_004",
+      "trip_id": "trip_history_v2_012",
+      "destination": "西安",
+      "feedback_summary": "合成历史 12：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.79,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-07-08T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_013",
+      "user_id": "user_005",
+      "trip_id": "trip_history_v2_013",
+      "destination": "成都",
+      "feedback_summary": "合成历史 13：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.55,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-07-09T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_014",
+      "user_id": "user_006",
+      "trip_id": "trip_history_v2_014",
+      "destination": "宁波",
+      "feedback_summary": "合成历史 14：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.63,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-07-10T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_015",
+      "user_id": "user_007",
+      "trip_id": "trip_history_v2_015",
+      "destination": "武汉",
+      "feedback_summary": "合成历史 15：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.71,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-07-11T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_016",
+      "user_id": "user_008",
+      "trip_id": "trip_history_v2_016",
+      "destination": "成都",
+      "feedback_summary": "合成历史 16：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.79,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-07-12T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_017",
+      "user_id": "user_001",
+      "trip_id": "trip_history_v2_017",
+      "destination": "成都",
+      "feedback_summary": "合成历史 17：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.55,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-08-05T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_018",
+      "user_id": "user_002",
+      "trip_id": "trip_history_v2_018",
+      "destination": "苏州",
+      "feedback_summary": "合成历史 18：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.63,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-08-06T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_019",
+      "user_id": "user_003",
+      "trip_id": "trip_history_v2_019",
+      "destination": "重庆",
+      "feedback_summary": "合成历史 19：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.71,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-08-07T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_020",
+      "user_id": "user_004",
+      "trip_id": "trip_history_v2_020",
+      "destination": "西安",
+      "feedback_summary": "合成历史 20：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.79,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-08-08T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_021",
+      "user_id": "user_005",
+      "trip_id": "trip_history_v2_021",
+      "destination": "成都",
+      "feedback_summary": "合成历史 21：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.55,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-08-09T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_022",
+      "user_id": "user_006",
+      "trip_id": "trip_history_v2_022",
+      "destination": "宁波",
+      "feedback_summary": "合成历史 22：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.63,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-08-10T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_023",
+      "user_id": "user_007",
+      "trip_id": "trip_history_v2_023",
+      "destination": "武汉",
+      "feedback_summary": "合成历史 23：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.71,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-08-11T10:00:00+08:00"
+    },
+    {
+      "history_id": "history_v2_024",
+      "user_id": "user_008",
+      "trip_id": "trip_history_v2_024",
+      "destination": "成都",
+      "feedback_summary": "合成历史 24：旅客重视休息、交通缓冲与清晰的限制说明。",
+      "preference_update_json": {
+        "pace_preferences_json.slow": 0.79,
+        "risk_preferences_json.weather_sensitive": 0.65
+      },
+      "tags_json": [
+        "synthetic",
+        "needs_buffer",
+        "preference_review"
+      ],
+      "created_at": "2026-08-12T10:00:00+08:00"
+    }
+  ]
+}
