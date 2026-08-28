@@ -11,6 +11,8 @@ from pydantic import BaseModel
 from app.agents.state import TravelState
 from app.common.config import settings
 from app.llm.deepseek_json_client import DeepSeekJSONClient, NativeToolCallingClient
+from app.mcp.tool_policy import filter_tool_policy
+from app.mcp.tool_runtime import get_mcp_tool_runtime
 from app.schemas.tool_orchestration_schema import (
     ActivityToolArguments,
     ExecutableToolCall,
@@ -105,7 +107,9 @@ def tool_plan_node(
     if not isinstance(request, dict):
         raise ValueError("planning_context.request 缺失")
 
-    required_calls = _build_required_calls(request)
+    registry = get_mcp_tool_runtime().tool_registry
+    policy = filter_tool_policy(registry)
+    required_calls = _build_required_calls(request, registry)
     retry_count = _safe_int(state.get("tool_plan_retry_count"))
     validation_issues: list[dict[str, Any]] = []
     optional_calls: list[ExecutableToolCall] = []
@@ -119,15 +123,15 @@ def tool_plan_node(
             raw_calls = active_client.generate_tool_calls(
                 system_prompt=_build_system_prompt(),
                 user_prompt=_build_user_prompt(state, planning_context),
-                tools=_optional_tool_definitions(),
+                tools=_optional_tool_definitions(policy),
                 max_tokens=settings.tool_plan_max_tokens,
             )
             optional_calls, validation_issues = _compile_optional_calls(
                 raw_calls=raw_calls,
-                request=request,
+                request=request, registry=registry, policy=policy,
             )
         else:
-            optional_calls = _rule_optional_calls(state=state, request=request)
+            optional_calls = _rule_optional_calls(state=state, request=request, registry=registry)
     except Exception as exc:
         # LLM 失败只取消可选增强；必选调用仍然保留。这是 Policy-Constrained
         # 架构的降级边界，不能让模型服务成为航班/酒店/天气的单点故障。
@@ -141,7 +145,7 @@ def tool_plan_node(
         planner_mode=("llm" if client is not None or settings.tool_plan_mode == "llm" else "rule"),
         model_id=model_id,
         plan_retry_count=retry_count,
-        calls=[*required_calls, *optional_calls],
+        calls=_compile_executable_calls([*required_calls, *optional_calls], registry, validation_issues),
         llm_selected_tools=[call.tool_name for call in optional_calls],
         validation_issues=validation_issues,
     )
@@ -159,7 +163,7 @@ def tool_plan_node(
     return {"tool_plan": plan.to_state_dict(), "trace": [trace]}
 
 
-def _build_required_calls(request: dict[str, Any]) -> list[ExecutableToolCall]:
+def _build_required_calls(request: dict[str, Any], registry: Any) -> list[ExecutableToolCall]:
     """从可信 State 生成三个一定执行的 MCP 调用。"""
 
     origin = _require_text(request.get("origin"), "origin")
@@ -171,12 +175,14 @@ def _build_required_calls(request: dict[str, Any]) -> list[ExecutableToolCall]:
     return [
         ExecutableToolCall(
             call_id="policy_weather", requirement_key="weather", tool_name="get_weather",
+            server_id=registry.resolve("get_weather").server_id,
             source="required_policy",
             arguments={"city": destination, "start_date": start_date, "end_date": end_date},
             reason="天气是当前旅行规划的必选外部事实。",
         ),
         ExecutableToolCall(
             call_id="policy_flights", requirement_key="round_trip_flights", tool_name="search_flights",
+            server_id=registry.resolve("search_flights").server_id,
             source="required_policy",
             arguments={
                 "origin": origin, "destination": destination, "depart_date": start_date,
@@ -186,6 +192,7 @@ def _build_required_calls(request: dict[str, Any]) -> list[ExecutableToolCall]:
         ),
         ExecutableToolCall(
             call_id="policy_hotels", requirement_key="hotel", tool_name="search_hotels",
+            server_id=registry.resolve("search_hotels").server_id,
             source="required_policy",
             arguments={"city": destination, "nights": nights, "people_count": people_count},
             reason="酒店是当前演示范围的必选候选。",
@@ -194,25 +201,34 @@ def _build_required_calls(request: dict[str, Any]) -> list[ExecutableToolCall]:
 
 
 def _compile_optional_calls(
-    *, raw_calls: list[dict[str, Any]], request: dict[str, Any]
+    *, raw_calls: list[dict[str, Any]], request: dict[str, Any], registry: Any,
+    policy: Any,
 ) -> tuple[list[ExecutableToolCall], list[dict[str, Any]]]:
     """按可选工具注册表编译 LLM 调用并注入可信参数。"""
 
     issues: list[dict[str, Any]] = []
     compiled: list[ExecutableToolCall] = []
     call_counts: Counter[str] = Counter()
+    allowed_names = {tool.tool_name for tool in policy.llm_visible_optional_tools}
     for raw in raw_calls[:MAX_OPTIONAL_TOOL_CALLS]:
         tool_name = str(raw.get("tool_name") or "")
-        spec = OPTIONAL_TOOL_REGISTRY.get(tool_name)
-        if spec is None:
+        if tool_name not in allowed_names:
             issues.append({"type": "unsupported_optional_tool", "tool_name": tool_name})
             continue
-        if call_counts[tool_name] >= int(spec["max_calls"]):
+        spec = OPTIONAL_TOOL_REGISTRY.get(tool_name)
+        max_calls = int(spec["max_calls"]) if spec is not None else 1
+        if call_counts[tool_name] >= max_calls:
             issues.append({"type": "optional_tool_call_limit_exceeded", "tool_name": tool_name})
             continue
         try:
-            semantic_args = spec["arguments_model"](**dict(raw.get("arguments") or {}))
-            arguments = spec["inject_trusted_arguments"](semantic_args, request)
+            descriptor = registry.resolve(tool_name)
+            if spec is not None:
+                semantic_args = spec["arguments_model"](**dict(raw.get("arguments") or {}))
+                arguments = spec["inject_trusted_arguments"](semantic_args, request)
+            else:
+                # 普通 Discovery Optional Tool 直接使用 MCP Schema 中定义的
+                # 参数；统一 Compiler 随后仍会执行 Registry Schema 校验。
+                arguments = dict(raw.get("arguments") or {})
         except Exception as exc:
             issues.append({"type": "invalid_optional_tool_arguments", "tool_name": tool_name, "message": str(exc)})
             continue
@@ -222,6 +238,7 @@ def _compile_optional_calls(
                 call_id=str(raw.get("call_id") or f"llm_{tool_name}_{call_counts[tool_name]}"),
                 requirement_key=f"optional_{tool_name}",
                 tool_name=tool_name,
+                server_id=descriptor.server_id,
                 source="llm_selected",
                 arguments=arguments,
                 reason="LLM 根据用户需求选择了注册的可选工具。",
@@ -230,26 +247,68 @@ def _compile_optional_calls(
     return compiled, issues
 
 
-def _optional_tool_definitions() -> list[dict[str, Any]]:
+def _optional_tool_definitions(policy: Any) -> list[dict[str, Any]]:
     """返回本轮可由 LLM 选择的工具 Schema，保持注册表顺序。"""
 
-    return [spec["definition"] for spec in OPTIONAL_TOOL_REGISTRY.values()]
+    definitions: list[dict[str, Any]] = []
+    for descriptor in policy.llm_visible_optional_tools:
+        spec = OPTIONAL_TOOL_REGISTRY.get(descriptor.tool_name)
+        definitions.append(
+            spec["definition"] if spec is not None else descriptor.as_llm_definition()
+        )
+    return definitions
 
 
-def _rule_optional_calls(*, state: TravelState, request: dict[str, Any]) -> list[ExecutableToolCall]:
+def _rule_optional_calls(*, state: TravelState, request: dict[str, Any], registry: Any) -> list[ExecutableToolCall]:
     """无模型测试/降级路径：仅用显式关键词复现可选调用边界。"""
 
     raw_message = str(state.get("raw_message") or "")
     interests = [term for term in ACTIVITY_INTENT_TERMS if term in raw_message]
     if not interests:
         return []
+    policy = filter_tool_policy(registry)
     return _compile_optional_calls(
         raw_calls=[{
             "call_id": "rule_activity_1", "tool_name": "search_city_activities",
             "arguments": {"interests": interests, "indoor_preference": (True if "室内" in interests else None)},
         }],
-        request=request,
+        request=request, registry=registry, policy=policy,
     )[0]
+
+
+def _deduplicate_calls(
+    calls: list[ExecutableToolCall], issues: list[dict[str, Any]]
+) -> list[ExecutableToolCall]:
+    """按 server/tool/规范化参数去重；必选调用因合并顺序而自然优先。"""
+
+    seen: set[tuple[str, str, str]] = set()
+    result: list[ExecutableToolCall] = []
+    for call in calls:
+        key = (call.server_id, call.tool_name, json.dumps(call.arguments, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
+        if key in seen:
+            issues.append({"type": "duplicate_tool_call", "tool_name": call.tool_name, "call_id": call.call_id})
+            continue
+        seen.add(key)
+        result.append(call)
+    return result
+
+
+def _compile_executable_calls(
+    calls: list[ExecutableToolCall], registry: Any, issues: list[dict[str, Any]]
+) -> list[ExecutableToolCall]:
+    """在 Merge 后执行 Registry/Server/Schema Validate，再做确定性去重。"""
+    valid: list[ExecutableToolCall] = []
+    for call in calls:
+        try:
+            descriptor = registry.resolve(call.tool_name)
+            if descriptor.server_id != call.server_id:
+                raise ValueError("server_id 与 Global Tool Registry 不一致")
+            registry.validate_arguments(call.tool_name, call.arguments)
+        except Exception as exc:
+            issues.append({"type": "invalid_executable_tool_call", "tool_name": call.tool_name, "call_id": call.call_id, "message": str(exc)})
+            continue
+        valid.append(call)
+    return _deduplicate_calls(valid, issues)
 
 
 def _build_default_client() -> DeepSeekJSONClient:

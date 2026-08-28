@@ -21,6 +21,7 @@ class ExecutableToolCall(BaseModel):
     call_id: str = Field(min_length=1)
     requirement_key: str = Field(min_length=1)
     tool_name: str = Field(min_length=1)
+    server_id: str = Field(min_length=1)
     source: ToolCallSource
     arguments: dict[str, Any] = Field(default_factory=dict)
     reason: str = Field(min_length=1)
@@ -44,6 +45,22 @@ class ToolPlan(BaseModel):
 
     def to_state_dict(self) -> dict[str, Any]:
         return self.model_dump(mode="json")
+
+
+class ToolCallResult(BaseModel):
+    """一次真实或缓存 Tool 调用的统一结果。"""
+
+    call_id: str
+    requirement_key: str
+    tool_name: str
+    server_id: str
+    source: ToolCallSource
+    status: Literal["success", "failed", "cached"]
+    arguments: dict[str, Any] = Field(default_factory=dict)
+    data: Any | None = None
+    latency_ms: int = Field(default=0, ge=0)
+    transport: str
+    error: dict[str, Any] | None = None
 
 
 class ToolCheckResult(BaseModel):

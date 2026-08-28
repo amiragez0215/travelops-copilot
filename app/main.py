@@ -55,6 +55,13 @@ async def lifespan(
     if settings.database_initialize_on_startup:
         init_db()
 
+    # MCP Runtime 是应用级控制面；stdio Session 仅在启动期 Discovery 和
+    # 单次 Tool Call 内短暂存在，不在 lifespan 中维持长连接。
+    if not hasattr(app.state, "mcp_tool_runtime"):
+        from app.mcp.tool_runtime import initialize_mcp_tool_runtime
+
+        app.state.mcp_tool_runtime = initialize_mcp_tool_runtime()
+
     # 2. Workflow Runtime 是阶段一的核心资源。
     #    如果 create_app() 已经注入 Fake Runtime，不能在这里覆盖。
     if (
@@ -113,6 +120,11 @@ async def lifespan(
         #    这只清理进程内对象，磁盘 Checkpoint 会继续保留，
         #    服务重启后仍可用相同 thread_id 恢复。
         reset_workflow_runtime()
+
+        if hasattr(app.state, "mcp_tool_runtime"):
+            from app.mcp.tool_runtime import reset_mcp_tool_runtime
+
+            reset_mcp_tool_runtime()
 
         # 5. 只有当前 App 实际持有对应资源时才清理。
         #    测试中注入的 Fake Runtime 不会被当成真实全局 Runtime 处理。
@@ -221,6 +233,11 @@ def create_app(
             "workflow_runtime_ready": hasattr(
                 request.app.state,
                 "plan_trip_runtime",
+            ),
+            "mcp_tool_registry_ready": hasattr(request.app.state, "mcp_tool_runtime"),
+            "mcp_tool_count": (
+                len(request.app.state.mcp_tool_runtime.tool_registry)
+                if hasattr(request.app.state, "mcp_tool_runtime") else 0
             ),
             "checkpoint_backend": "sqlite",
         }

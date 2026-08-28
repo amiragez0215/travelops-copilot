@@ -37,6 +37,7 @@ INVALIDATED_STATE_DEFAULTS: dict[str, Any] = {
     "tool_plan": {},
     "tool_execution_result": {},
     "tool_check_result": {},
+    "tool_call_results": [],
     "tool_plan_retry_count": 0,
     "tool_execute_retry_count": 0,
     "activity_result": {},

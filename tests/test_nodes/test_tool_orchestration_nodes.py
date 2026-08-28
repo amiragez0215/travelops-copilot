@@ -5,6 +5,9 @@ from typing import Any
 from app.nodes.tool_check_node import route_after_tool_check, tool_check_node
 from app.nodes.tool_execute_node import tool_execute_node
 from app.nodes.tool_plan_node import tool_plan_node
+from app.nodes.tool_plan_node import _optional_tool_definitions
+from app.mcp.tool_policy import filter_tool_policy
+from app.mcp.tool_registry import ToolDescriptor, ToolRegistry
 
 
 class FakeNativeToolClient:
@@ -25,6 +28,13 @@ class FakeTravelClient:
     client_mode = "fake"
     protocol = "local"
     transport = "in_process"
+
+    def __init__(self) -> None:
+        self.calls: list[tuple[str, dict[str, Any]]] = []
+
+    def call_tool(self, *, server_id: str, tool_name: str, arguments: dict[str, Any]):
+        self.calls.append((tool_name, dict(arguments)))
+        return getattr(self, tool_name)(**arguments)
 
     def get_weather(self, city: str, start_date: str, end_date: str | None = None):
         return {"status": "ok", "city": city, "daily": [], "risks": [], "warnings": [], "source": "fake"}
@@ -111,18 +121,49 @@ def test_tool_plan_compiles_all_seen_calls_through_the_optional_tool_registry():
     }
 
 
+def test_new_discovered_non_required_tool_is_automatically_llm_visible():
+    registry = ToolRegistry([
+        ToolDescriptor("get_weather", "weather", "", {"type": "object"}),
+        ToolDescriptor("search_flights", "flight", "", {"type": "object"}),
+        ToolDescriptor("search_hotels", "hotel", "", {"type": "object"}),
+        ToolDescriptor("search_restaurants", "food", "查询餐厅", {
+            "type": "object", "properties": {"cuisine": {"type": "string"}},
+            "required": ["cuisine"], "additionalProperties": False,
+        }),
+    ])
+
+    definitions = _optional_tool_definitions(filter_tool_policy(registry))
+
+    assert [item["function"]["name"] for item in definitions] == ["search_restaurants"]
+    assert definitions[0]["function"]["parameters"]["required"] == ["cuisine"]
+
+
 def test_tool_execute_preserves_rank_budget_inputs_and_adds_activity_context():
     state = _state()
     state.update(tool_plan_node(state, client=FakeNativeToolClient([
         {"call_id": "a1", "tool_name": "search_city_activities", "arguments": {"interests": ["展览"]}}
     ])))
 
-    update = tool_execute_node(state, client=FakeTravelClient())
+    client = FakeTravelClient()
+    update = tool_execute_node(state, client=client)
 
     assert update["raw_flight_results"]["outbound"][0]["flight_id"] == "out-1"
     assert update["raw_hotel_results"]["items"][0]["hotel_id"] == "hotel-1"
     assert update["activity_candidates"][0]["activity_id"] == "SHA-ACT-001"
     assert update["planning_context"]["activity_candidates"][0]["activity_id"] == "SHA-ACT-001"
+    assert client.calls[0] == ("get_weather", state["tool_plan"]["calls"][0]["arguments"])
+    assert {item["server_id"] for item in update["tool_call_results"]} == {"weather", "flight", "hotel", "activity"}
+
+
+def test_tool_execute_uses_compiled_arguments_instead_of_rebuilding_from_state():
+    state = _state()
+    state.update(tool_plan_node(state, client=FakeNativeToolClient([])))
+    state["tool_plan"]["calls"][0]["arguments"]["city"] = "计划中的城市"
+    client = FakeTravelClient()
+
+    tool_execute_node(state, client=client)
+
+    assert client.calls[0][1]["city"] == "计划中的城市"
 
 
 def test_tool_check_passes_required_calls_and_allows_optional_activity_degrade():

@@ -528,6 +528,7 @@ def build_initial_plan_trip_state(
         "budget_retry_count": 0,
         "tool_plan_retry_count": 0,
         "tool_execute_retry_count": 0,
+        "tool_call_results": [],
         "rag_retry_count": 0,
         "proposal_retry_count": 0,
         "decision_attempt_count": 0,

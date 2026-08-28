@@ -41,6 +41,7 @@ def tool_check_node(state: TravelState) -> dict[str, Any]:
         "unsupported_optional_tool",
         "invalid_optional_tool_arguments",
         "optional_tool_call_limit_exceeded",
+        "invalid_executable_tool_call",
     }
     needs_replan = any(
         isinstance(issue, dict) and issue.get("type") in replan_issue_types

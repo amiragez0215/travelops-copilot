@@ -470,6 +470,7 @@ class TravelState(TypedDict, total=False):
     """ToolExecuteNode 的执行摘要，不替代各工具原有 fetch_meta。"""
 
     tool_check_result: dict[str, Any]
+    tool_call_results: list[dict[str, Any]]
     """ToolCheckNode 的通过、重试、重新规划或失败路由决定。"""
 
     tool_plan_retry_count: int
